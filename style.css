@@ -179,6 +179,7 @@ li {
     position: relative;
   }
   .slider div {
+    display: grid;
     width: 100%;
     min-height: calc(100vh - 11vh - 50px);
     text-align: center;
