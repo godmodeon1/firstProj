@@ -86,7 +86,7 @@ ul {
 .nav a {
   text-decoration: none; /*убираем подчеркивание текста ссылок*/
   color:#666; /*меняем цвет ссылок*/
-  padding: 0px 15px; /*добавляем отступ*/
+  padding: 0px 1vw; /*добавляем отступ*/
   font-family: arial; /*меняем шрифт*/
   line-height: 50px; /*ровняем меню по вертикали*/
   display: block; 
@@ -95,6 +95,9 @@ ul {
   -o-transition: all 0.3s 0.01s ease;
   -webkit-transition: all 0.3s 0.01s ease;
 
+}
+.nav ul:first-child {
+  border-left: 1px solid #000; /*добавляем бордюр справа*/
 }
 .nav a:hover {
   background:#fa6c65;/*добавляем эффект при наведении*/
@@ -110,14 +113,15 @@ li {
 
 .grid-container {
     display: grid; /* элемент отображается как блочный   grid-контейнер */
-    padding: 0 10px 10px 10px; /* внешний отступ элемента со всех сторон */
-    grid-template-rows: 11vh 50px repeat(2, 20vh); /* определяем количество и ширину строк в макете сетки */
+    padding: 0 0 10px 0; /* внешний отступ элемента со всех сторон */
+    grid-template-rows: 11vh 50px calc(100vh - 11vh - 50px) 20vh; /* определяем количество и ширину строк в макете сетки */
     grid-template-columns: repeat(8, 1fr); /* определяем количество и ширину столбцов в макете сетки */
     grid-template-areas:
       '. header . . . contacts contacts .' /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
       'nav nav nav nav nav nav nav nav' /* точка обозначает элемент без имени */
-      'main main main main main main main main' /* точка обозначает элемент без имени */
+      'slider slider slider slider slider slider slider slider' /* точка обозначает элемент без имени */
       'footer footer footer footer footer footer footer footer';
+    align-items: center;
 }
 
   .grid-container > div {
@@ -162,9 +166,27 @@ li {
     grid-area: footer; /* задаем имя элемента */
     background: green !important; /* цвет заднего фона */
   }
-  .main {
-    grid-area: main; /* задаем имя элемента */
-    background: violet !important; /* цвет заднего фона */
+  .slider {
+    grid-area: slider; /* задаем имя элемента */
+    align-content: center;
+    background: url(img/slider.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+    color: #272727; 
+    position: relative;
+  }
+  .slider div {
+    width: 100%;
+    min-height: calc(100vh - 11vh - 50px);
+    text-align: center;
+    align-content: center;
+  }
+  .slider div span {
+    background: rgba(255,255,255,0.85);
+    padding: 0.2em;
   }
   .letter {
     margin-left: 20px;
