@@ -222,7 +222,7 @@ li {
   }
 
   /*social bar */
-  
+
   .socials {
     grid-area: socials;
     align-content: center;
@@ -263,13 +263,4 @@ li {
   .socials a:hover {
     background: none;/*добавляем эффект при наведении*/
   }
-  .socials ul li:nth-child(1) {
-  }
-  .socials ul li:nth-child(2) {
-  }
-  .socials ul li:nth-child(3) {
-  }
-  .socials ul li:nth-child(4) {
-  }
-
   /* end social bar*/
