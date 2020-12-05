@@ -14,7 +14,7 @@ h4,h5,h6,pre,code,form,fieldset,legend,input,
 textarea,p,blockquote,th,td {
 	margin:0;
     padding:0;
-    background-color: red;
+    background-color: none;
 }
 table {
 	border-collapse:collapse;
@@ -73,52 +73,99 @@ legend {
 	color:#000;
 }
 /* START */
+@font-face {
+  font-family: 'JMH Typewriter Bold'; 
+  src: url(fonts/JMHTypewriterBold.ttf); 
+}
+ul {
+  list-style: none; /*убираем маркеры списка*/
+  margin: 0; /*убираем отступы*/
+  padding-left: 0; /*убираем отступы*/
+  height: 50px; /*задаем высоту*/
+}
+.nav a {
+  text-decoration: none; /*убираем подчеркивание текста ссылок*/
+  color:#666; /*меняем цвет ссылок*/
+  padding: 0px 15px; /*добавляем отступ*/
+  font-family: arial; /*меняем шрифт*/
+  line-height: 50px; /*ровняем меню по вертикали*/
+  display: block; 
+  border-right: 1px solid #000; /*добавляем бордюр справа*/
+  -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+  -o-transition: all 0.3s 0.01s ease;
+  -webkit-transition: all 0.3s 0.01s ease;
+
+}
+.nav a:hover {
+  background:#fa6c65;/*добавляем эффект при наведении*/
+  color: #fbfbfb;
+}
+li {
+  float:left; /*Размещаем список горизонтально для реализации меню*/
+}
 
 .grid {
     display: grid;
-    grid-gap: 20px;
 }
 
-.container {
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: 1fr;
-    grid-template-areas: 
-    "empty logo empty empty empty empty empty empty"
-    ;
+.grid-container {
+    display: grid; /* элемент отображается как блочный   grid-контейнер */
+    padding: 0 10px 10px 10px; /* внешний отступ элемента со всех сторон */
+    grid-template-rows: 11vh 50px repeat(2, 20vh); /* определяем количество и ширину строк в макете сетки */
+    grid-template-columns: repeat(8, 1fr); /* определяем количество и ширину столбцов в макете сетки */
+    grid-template-areas:
+      '. header . . . contacts contacts .' /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
+      'nav nav nav nav nav nav nav nav' /* точка обозначает элемент без имени */
+      'main main main main main main main main' /* точка обозначает элемент без имени */
+      'footer footer footer footer footer footer footer footer';
 }
 
-
-.empty {
-    grid-area: empty;
-    background-color: yellow;
-}
-
-.logo {
-    grid-area: logo;
-    background-color: blue;
-}
-
-.contacts {
+  .grid-container > div {
+    text-align: center; /* горизонтальное выравнивание текста */
+  }
+  .header {
+    grid-area: header; /* задаем имя элемента */
+    align-self: center;
+    justify-self: left;
+    font-family: 'JMH Typewriter Bold'; 
+    color: #666666;
+    font-size: 2em;
+  }
+  .contacts {
     grid-area: contacts;
-    background-color: green;
-}
+    align-self: center;
+    font-family: sans-serif;
+    font-size: 0.8em;
+    color: #8b8b8b;
+  }
 
-.freemenu {
-    grid-area: emptymenu;
-    background-color: magenta;
-}
-
-.slider {
-    grid-area: slider;
-    background-color: black;
- }
-
-.socials {
-    grid-area: socials;
-    background-color #ff3321;
- }
-
- .nav {
+  .nav {
     grid-area: nav;
-    background-color orangered;   
- }
+    grid-template-rows: 1fr;
+    grid-template-columns: 12.5% 75% 12.5%;
+    grid-template-areas: 
+    '. buttons .';
+    align-items: center;
+    background: #fbfbfb;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 0.75em;
+    text-transform: uppercase;
+  }
+
+  .buttons {
+    background-color: #fbfbfb;
+    justify-self: left;
+    grid-area: buttons;
+  }
+  .footer {
+    grid-area: footer; /* задаем имя элемента */
+    background: green !important; /* цвет заднего фона */
+  }
+  .main {
+    grid-area: main; /* задаем имя элемента */
+    background: violet !important; /* цвет заднего фона */
+  }
+  .letter {
+    margin-left: 20px;
+  }
