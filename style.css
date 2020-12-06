@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 
 @font-face {
   font-family: 'JMH Typewriter Bold'; 
@@ -7,8 +8,9 @@
 
 
 html{
-	color:#000;
-	background:#FFF;
+	color:#5c5c5c;
+  background:#FFF;
+  font-family: 'Roboto Slab', serif;
 }
 /*
 	TODO remove settings on BODY since we can't namespace it.
@@ -86,14 +88,14 @@ ul {
   list-style: none; /*убираем маркеры списка*/
   margin: 0; /*убираем отступы*/
   padding-left: 0; /*убираем отступы*/
-  height: 50px; /*задаем высоту*/
+  height: 40px; /*задаем высоту*/
 }
 .nav a {
   text-decoration: none; /*убираем подчеркивание текста ссылок*/
   color:#666; /*меняем цвет ссылок*/
   padding: 0px 1vw; /*добавляем отступ*/
   font-family: arial; /*меняем шрифт*/
-  line-height: 50px; /*ровняем меню по вертикали*/
+  line-height: 40px; /*ровняем меню по вертикали*/
   display: block; 
   border-right: 1px solid #000; /*добавляем бордюр справа*/
   -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
@@ -119,12 +121,13 @@ li {
 .grid-container {
     display: grid; /* элемент отображается как блочный   grid-контейнер */
     padding: 0 0 10px 0; /* внешний отступ элемента со всех сторон */
-    grid-template-rows: 11vh 50px calc(100vh - 11vh - 50px) 20vh; /* определяем количество и ширину строк в макете сетки */
+    grid-template-rows: 11vh 40px calc(100vh - 11vh - 40px) 20vh 20vh; /* определяем количество и ширину строк в макете сетки */
     grid-template-columns: repeat(8, 1fr); /* определяем количество и ширину столбцов в макете сетки */
     grid-template-areas:
       '. header . . . contacts contacts .' /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
       'nav nav nav nav nav nav nav nav' /* точка обозначает элемент без имени */
       'slider slider slider slider slider slider slider slider' /* точка обозначает элемент без имени */
+      '. slogan slogan slogan slogan slogan slogan .'
       'footer footer footer footer footer footer footer footer';
     align-items: center;
 }
@@ -188,7 +191,7 @@ li {
     font-size: 2em;
     color: #272727; 
     position: relative;
-    min-height: calc(100vh - 11vh - 50px);
+    min-height: calc(100vh - 11vh - 40px);
   }
   .slider div:nth-child(3) {
     font-size: 0.75em;
@@ -226,6 +229,7 @@ li {
   .socials {
     grid-area: socials;
     align-content: center;
+    min-width: 120px;
   }
   .socials ul {
     height: 10px; /*задаем высоту*/
@@ -264,3 +268,23 @@ li {
     background: none;/*добавляем эффект при наведении*/
   }
   /* end social bar*/
+
+  .slogan {
+    grid-area: slogan; /* задаем имя элемента */
+    align-self: start; 
+    padding-top: 0.6em;
+  }
+  .slogan br {
+    display: block;
+    height: 1px;
+  }
+  .slogan h2 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .slogan h2 span {
+    color: #fa6c65;
+  }
+  .slogan span:last-child {
+    line-height: 2em;
+  }
