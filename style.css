@@ -120,15 +120,12 @@ li {
 
 .grid-container {
     display: grid; /* элемент отображается как блочный   grid-контейнер */
-    padding: 0 0 10px 0; /* внешний отступ элемента со всех сторон */
-    grid-template-rows: 11vh 40px calc(100vh - 11vh - 40px) 20vh 20vh; /* определяем количество и ширину строк в макете сетки */
+    grid-template-rows: 11vh 40px calc(100vh - 11vh - 40px); /* определяем количество и ширину строк в макете сетки */
     grid-template-columns: repeat(8, 1fr); /* определяем количество и ширину столбцов в макете сетки */
     grid-template-areas:
       '. header . . . contacts contacts .' /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
       'nav nav nav nav nav nav nav nav' /* точка обозначает элемент без имени */
-      'slider slider slider slider slider slider slider slider' /* точка обозначает элемент без имени */
-      '. slogan slogan slogan slogan slogan slogan .'
-      'footer footer footer footer footer footer footer footer';
+      'slider slider slider slider slider slider slider slider'; /* точка обозначает элемент без имени */
     align-items: center;
 }
 
@@ -266,11 +263,23 @@ li {
     color: #5c5c5c;
     font-family: 'Roboto Slab', serif;
   }
+  .second-container {
+    display: grid; /* элемент отображается как блочный   grid-контейнер */
+    grid-template-rows: 20vh 20vh 20vh; /* определяем количество и ширину строк в макете сетки */
+    grid-template-columns: repeat(8, 1fr); /* определяем количество и ширину столбцов в макете сетки */
+    grid-template-areas:
+    '. slogan slogan slogan slogan slogan slogan .'
+    '. . services services services services . .'
+    'footer footer footer footer footer footer footer footer';
+    align-items: center;
+    background-color: #fbfbfb;
+  }
   .slogan {
     grid-area: slogan; /* задаем имя элемента */
-    align-self: start; 
-    padding: 0.6em 20px;
+    align-self: start;
+    padding: 0 20px;
     background-color: #fbfbfb;
+    text-align: center;
   }
   .slogan br {
     display: block;
@@ -286,9 +295,18 @@ li {
   .slogan span:last-child {
     line-height: 2em;
   }
-  .emptygray {
-    grid-area: emptygray;
-    background-color: #fbfbfb;
+  .services {
+    grid-area: services;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+    justify-items: center;
+  }
+  .services div {
+    text-align: center;
+  }
+  .services img {
+    width: 33px;
+    height: 33px;
   }
   .footer {
     grid-area: footer; /* задаем имя элемента */
