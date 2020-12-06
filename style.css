@@ -158,6 +158,9 @@ li {
   .contacts a:hover {
     color: #fa6c65;
   }
+  .letter {
+    margin-left: 20px;
+  }
   .nav {
     grid-area: nav;
     grid-template-rows: 1fr;
@@ -176,52 +179,6 @@ li {
     background-color: #fbfbfb;
     justify-self: left;
     grid-area: buttons;
-  }
-  .footer {
-    grid-area: footer; /* задаем имя элемента */
-    background: green !important; /* цвет заднего фона */
-  }
-  .slider {
-    grid-area: slider; /* задаем имя элемента */
-    align-content: center;
-    background: url(img/slider.png) no-repeat;
-    background-size: cover;
-    background-position: center;
-    font-weight: bold;
-    font-size: 2em;
-    color: #272727; 
-    position: relative;
-    min-height: calc(100vh - 11vh - 40px);
-  }
-  .slider div:nth-child(3) {
-    font-size: 0.75em;
-  }
-  input {
-    border: 0;
-    background-color: #fa6c65;
-    color: #fff;
-    padding: 1.4em;
-    font-family: "Arial";
-    font-size: 0.35em;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 0.2em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  input[type="button"]:hover {
-    background-color: #fbfbfb;
-    color: #666;
-    transition: background-color 0.3s ease;
-  }
-  .head-content {
-    background: rgba(255,255,255,0.85);
-    padding: 0.2em;
-    color: #5c5c5c;
-    font-family: 'Roboto Slab', serif;
-  }
-  .letter {
-    margin-left: 20px;
   }
 
   /*social bar */
@@ -267,12 +224,53 @@ li {
   .socials a:hover {
     background: none;/*добавляем эффект при наведении*/
   }
-  /* end social bar*/
 
+  /* end social bar*/ 
+
+  .slider {
+    grid-area: slider; /* задаем имя элемента */
+    align-content: center;
+    background: url(img/slider.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-weight: bold;
+    font-size: 2em;
+    color: #272727; 
+    position: relative;
+    min-height: calc(100vh - 11vh - 40px);
+  }
+  .slider div:nth-child(3) {
+    font-size: 0.75em;
+  }
+  input {
+    border: 0;
+    background-color: #fa6c65;
+    color: #fff;
+    padding: 1.4em;
+    font-family: "Arial";
+    font-size: 0.35em;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 0.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  input[type="button"]:hover {
+    background-color: #fbfbfb;
+    color: #666;
+    transition: background-color 0.3s ease;
+  }
+  .head-content {
+    background: rgba(255,255,255,0.85);
+    padding: 0.2em;
+    color: #5c5c5c;
+    font-family: 'Roboto Slab', serif;
+  }
   .slogan {
     grid-area: slogan; /* задаем имя элемента */
     align-self: start; 
-    padding-top: 0.6em;
+    padding: 0.6em 20px;
+    background-color: #fbfbfb;
   }
   .slogan br {
     display: block;
@@ -287,4 +285,12 @@ li {
   }
   .slogan span:last-child {
     line-height: 2em;
+  }
+  .emptygray {
+    grid-area: emptygray;
+    background-color: #fbfbfb;
+  }
+  .footer {
+    grid-area: footer; /* задаем имя элемента */
+    background: green !important; /* цвет заднего фона */
   }
