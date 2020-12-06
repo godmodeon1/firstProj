@@ -265,7 +265,7 @@ li {
   }
   .second-container {
     display: grid; /* элемент отображается как блочный   grid-контейнер */
-    grid-template-rows: 20vh 20vh 20vh; /* определяем количество и ширину строк в макете сетки */
+    grid-template-rows: 25vh 20vh 20vh; /* определяем количество и ширину строк в макете сетки */
     grid-template-columns: repeat(8, 1fr); /* определяем количество и ширину столбцов в макете сетки */
     grid-template-areas:
     '. slogan slogan slogan slogan slogan slogan .'
@@ -277,7 +277,7 @@ li {
   .slogan {
     grid-area: slogan; /* задаем имя элемента */
     align-self: start;
-    padding: 0 20px;
+    padding: 0 100px;
     background-color: #fbfbfb;
     text-align: center;
   }
@@ -302,11 +302,57 @@ li {
     justify-items: center;
   }
   .services div {
+    position: relative;
     text-align: center;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 0.7em;
   }
-  .services img {
+  .services img:nth-child(2) {
     width: 33px;
     height: 33px;
+    padding: 30px;
+    background-color: #efefef;
+    border-radius: 90px;
+    display: block;
+    margin: 0 auto;
+  }
+  .services img:first-child {
+    display: none;
+    position: absolute;
+  }
+  .services a {
+    color: #666;
+    text-decoration: none;
+    line-height: 1.5em;
+  }
+  .services a:hover {
+    color: #fa6c65;
+  }
+
+  @keyframes pointer {
+   0% {top: 0;}
+   100% {top: -5px;}
+  }
+  
+  .services a:hover img:first-child {
+    display: block;
+    animation: pointer 0.2s ease forwards;
+  }
+  .services a:hover img:nth-child(2) {
+    background-color: #fa6c65;
+    width: 43px;
+    height: 43px;
+    padding: 25px;
+    transition: background-color 0.4s ease,
+      width 0.4s ease,
+      height 0.4s ease,
+      padding 0.4s ease; 
+  }
+  .toCenter {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
   .footer {
     grid-area: footer; /* задаем имя элемента */
