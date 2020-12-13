@@ -5,35 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Moose web-site</title>
-<script>
-function hide(hid, shw, lnk) {
-
-    //find all what need to hide
-    let toHide = document.querySelectorAll(hid);
-    for( let i = 0; i < toHide.length; i++){ 
-      toHide[i].style.display = "none"; 
-    }
-
-    //find all what need to show
-    let toShow = document.querySelectorAll(shw);
-    for( let i = 0; i < toShow.length; i++){ 
-      toShow[i].style.display = "block"; 
-    }
-
-    //for drop red color from prevue link 
-    let clear = document.querySelectorAll('.filter ul li');
-    for( let z = 0; z < clear.length; z++){
-        clear[z].style.color = "";
-    }
-
-    //painting the current link in red
-    let selector = 1 + parseInt(lnk);
-    let link = document.querySelector('.filter ul li:nth-child(' + selector +')');
-    link.style.color = "#fa6c65";
-
-}
-
-</script>
+<script src="script.js"></script>
 </head>
 <body>
     <div class="grid-container">
@@ -91,27 +63,38 @@ function hide(hid, shw, lnk) {
         </div>
         <div class="filter">
             <ul> <!--.graphics .web .illustation .audio .video--> 
-            <li><span onclick='return hide(".empty", ".web, .graphics, .illustration, .audio, .video", "0")'>all</span></li>
-            <li><span onclick='return hide(".graphics, .illustration, .audio, .video", ".web", "1")'>web design</span></li>
-            <li><span onclick='return hide(".web, .illustation, .audio, .video", ".graphics", "2")'>graphics</span></li>
-            <li><span onclick='return hide(".graphics, .web, .illustration, .audio", ".video", "3")'>video</span></li>
-            <li><span onclick='return hide(".graphics, .web, .audio, .video", ".illustration", "4")'>illustration</span></li>
-            <li><span onclick='return hide(".graphics, .web, .illustration, .video", ".audio", "5")'>audio</span></li>
+            <li><span onclick='hide(".empty", ".web, .graphics, .illustration, .audio, .video", "0")'>all</span></li>
+            <li><span onclick='hide(".graphics, .illustration, .audio, .video", ".web", "1")'>web design</span></li>
+            <li><span onclick='hide(".web, .illustation, .audio, .video", ".graphics", "2")'>graphics</span></li>
+            <li><span onclick='hide(".graphics, .web, .illustration, .audio", ".video", "3")'>video</span></li>
+            <li><span onclick='hide(".graphics, .web, .audio, .video", ".illustration", "4")'>illustration</span></li>
+            <li><span onclick='hide(".graphics, .web, .illustration, .video", ".audio", "5")'>audio</span></li>
             </ul>
         </div>
         <div class="thumbnails grid">
-            <div alt="graphics" title="graphics" id="tmb1" class="graphics"></div>
-            <div alt="web design" title="web design" id="tmb2" class="web"></div>
-            <div alt="graphics" title="graphics" id="tmb3" class="graphics"></div>
-            <div alt="graphics" title="graphics" id="tmb4" class="graphics"></div>
-            <div alt="illustration" title="illustration" id="tmb5" class="illustration"></div>
-            <div alt="illustration" title="illustration" id="tmb6" class="illustration"></div>
-            <div alt="web design" title="web design" id="tmb7" class="web"></div>
-            <div alt="video" title="video" id="tmb8" class="video"></div>
-            <div alt="video" title="video" id="tmb9" class="video"></div>
-            <div alt="video" title="video" id="tmb10" class="video"></div>
-            <div alt="audio" title="audio" id="tmb11" class="audio"></div>
-            <div alt="audio" title="audio"id="tmb12" class="audio"></div>    
+            <div tabindex="0" alt="graphics" title="graphics" id="tmb1" class="graphics"></div>
+            <div tabindex="0" alt="web design" title="web design" id="tmb2" class="web"></div>
+            <div tabindex="0" alt="graphics" title="graphics" id="tmb3" class="graphics"></div>
+            <div tabindex="0" alt="graphics" title="graphics" id="tmb4" class="graphics"></div>
+            <div tabindex="0" alt="illustration" title="illustration" id="tmb5" class="illustration"></div>
+            <div tabindex="0" alt="illustration" title="illustration" id="tmb6" class="illustration"></div>
+            <div tabindex="0" alt="web design" title="web design" id="tmb7" class="web"></div>
+            <div tabindex="0" alt="video" title="video" id="tmb8" class="video"></div>
+            <div tabindex="0" alt="video" title="video" id="tmb9" class="video"></div>
+            <div tabindex="0" alt="video" title="video" id="tmb10" class="video"></div>
+            <div tabindex="0" alt="audio" title="audio" id="tmb11" class="audio"></div>
+            <div tabindex="0" alt="audio" title="audio"id="tmb12" class="audio"></div>    
+        </div>
+    </div>
+    <div class="blog grid">
+        <div class="blog-content">
+
+        </div>
+        <div class="blog-slider">
+
+        </div>
+        <div class="blog-button">
+
         </div>
     </div>
     <script>hide(".empty", ".web, .graphics, .illustration, .audio, .video", "0");</script>
