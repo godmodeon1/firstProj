@@ -6,7 +6,6 @@
   src: url(fonts/JMHTypewriterBold.ttf); 
 }
 
-
 html{
 	color:#5c5c5c;
   background:#FFF;
@@ -120,7 +119,7 @@ li {
 
 .grid-container {
     display: grid; /* элемент отображается как блочный   grid-контейнер */
-    grid-template-rows: 11vh 40px calc(100vh - 11vh - 40px); /* определяем количество и ширину строк в макете сетки */
+    grid-template-rows: 80px 40px calc(100vh - 80px - 40px); /* определяем количество и ширину строк в макете сетки */
     grid-template-columns: repeat(8, 1fr); /* определяем количество и ширину столбцов в макете сетки */
     grid-template-areas:
       '. header . . . contacts contacts .' /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
@@ -143,7 +142,6 @@ li {
   .contacts {
     grid-area: contacts;
     align-self: center;
-    font-family: sans-serif;
     font-size: 0.8em;
     color: #8b8b8b;
     min-width: 310px;
@@ -265,12 +263,11 @@ li {
   }
   .second-container {
     display: grid; /* элемент отображается как блочный   grid-контейнер */
-    grid-template-rows: 25vh 20vh 20vh; /* определяем количество и ширину строк в макете сетки */
+    grid-template-rows: 140px 200px; /* определяем количество и ширину строк в макете сетки */
     grid-template-columns: repeat(8, 1fr); /* определяем количество и ширину столбцов в макете сетки */
     grid-template-areas:
     '. slogan slogan slogan slogan slogan slogan .'
-    '. . services services services services . .'
-    'footer footer footer footer footer footer footer footer';
+    '. . services services services services . .';
     align-items: center;
     background-color: #fbfbfb;
   }
@@ -322,7 +319,7 @@ li {
     position: absolute;
   }
   .services a {
-    color: #666;
+    color: #bbb;
     text-decoration: none;
     line-height: 1.5em;
   }
@@ -331,13 +328,13 @@ li {
   }
 
   @keyframes pointer {
-   0% {top: 0;}
-   100% {top: -5px;}
+   0% {width: 0px; height: 0px; top: 0;}
+   100% {width: 20px; height: 6px; top: -5px;}
   }
   
   .services a:hover img:first-child {
     display: block;
-    animation: pointer 0.2s ease forwards;
+    animation: pointer 0.3s ease forwards;
   }
   .services a:hover img:nth-child(2) {
     background-color: #fa6c65;
@@ -345,16 +342,195 @@ li {
     height: 43px;
     padding: 25px;
     transition: background-color 0.4s ease,
-      width 0.4s ease,
-      height 0.4s ease,
-      padding 0.4s ease; 
+      width 0.1s ease,
+      padding 0.1s ease,
+      height 0.1s ease;
   }
   .toCenter {
     left: 0;
     right: 0;
     margin: 0 auto;
   }
-  .footer {
-    grid-area: footer; /* задаем имя элемента */
-    background: green !important; /* цвет заднего фона */
+  .portfolio {
+    grid-template-rows: 90px 7vh 50vw; 
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-areas:
+      '. latest latest latest latest latest latest .' /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
+      '. filter filter filter filter filter filter .' /* точка обозначает элемент без имени */
+      'thumbnails thumbnails thumbnails thumbnails thumbnails thumbnails thumbnails thumbnails'; /* точка обозначает элемент без имени */
+    align-items: center;
+  }
+  .latest {
+    grid-area: latest;
+    justify-self: center;
+    align-self: end;
+    margin-bottom: 30px;
+  }
+  .latest span {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #fa6c65;
+  }
+  .filter {
+    grid-area: filter;
+    justify-self: center;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #616161;
+  }
+  .filter ul li:hover {
+    color: #fa6c65;
+    cursor: pointer;
+  }
+  .filter ul li:focus {
+    color: #fa6c65;
+  }
+  .filter ul li::before {
+    content: '•';
+    vertical-align: middle;
+    font-size: 2em;
+    margin-left: 30px;
+    padding-right: 3px;
+    color: #fa6c65;
+  }
+  .filter ul li:first-child::before {
+    margin-left: 0px;
+  }
+  .thumbnails {
+    padding: 0 100px;
+    grid-area: thumbnails;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 16.38vw 16.38vw 16.38vw;
+    justify-items: center;
+    justify-content: center;
+    grid-gap: 7px;
+  }
+  .thumbnails div {
+    width: 21vw;
+    height: 16.38vw;
+    border: solid 1px black;
+  }
+  .thumbnails div:hover {
+    transform: scale(1.01);
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 0 5px #666;
+  }
+  #tmb1 {
+    background: url(img/tmb/tmb1.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb2 {
+    background: url(img/tmb/tmb2.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb3 {
+    background: url(img/tmb/tmb3.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb4 {
+    background: url(img/tmb/tmb4.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb5 {
+    background: url(img/tmb/tmb5.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb6 {
+    background: url(img/tmb/tmb6.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb7 {
+    background: url(img/tmb/tmb7.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb8 {
+    background: url(img/tmb/tmb8.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb9 {
+    background: url(img/tmb/tmb9.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb10 {
+    background: url(img/tmb/tmb10.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb11 {
+    background: url(img/tmb/tmb11.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+  #tmb12 {
+    background: url(img/tmb/tmb12.png) no-repeat;
+    background-size: cover;
+    background-position: center; 
+  }
+
+  @media screen and (min-width: 1331px) { /* for all screen biggest than 1331px */
+    .contacts br {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 1330px) { /* for all screen smaller than 1331, but look at next limit */
+    .slogan {
+      padding: 0;
+    }
+    .contacts br {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1053px) {
+    .second-container {
+      grid-template-rows: 160px 200px; /* определяем количество и ширину строк в макете сетки */
+    }
+    .contacts br {
+      display: none;
+    }
+
+  }
+  @media screen and (max-width: 900px) {
+  
+    .grid-container {
+      grid-template-columns: repeat(7, 1fr) 20%;
+      grid-template-areas:
+        'header . . . . . contacts contacts'
+        'nav nav nav nav nav nav nav nav' 
+        'slider slider slider slider slider slider slider slider';
+    }
+    .nav {
+      grid-template-areas: 
+      '. buttons . socials';  
+      grid-template-columns: 0 85% 0 15%;
+    }
+    .socials {
+      justify-self: end;
+    }
+    .contacts {
+      min-width: 200px;
+      text-align: right !important;
+      padding-right: 20px;
+    }
+    .contacts br {
+      display: inline;
+    }
+    .header {
+      padding-left: 20px;
+    }
   }

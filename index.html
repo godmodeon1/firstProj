@@ -5,11 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Moose web-site</title>
+<script>
+function hide(hid, shw, lnk) {
+
+    //find all what need to hide
+    let toHide = document.querySelectorAll(hid);
+    for( let i = 0; i < toHide.length; i++){ 
+      toHide[i].style.display = "none"; 
+    }
+
+    //find all what need to show
+    let toShow = document.querySelectorAll(shw);
+    for( let i = 0; i < toShow.length; i++){ 
+      toShow[i].style.display = "block"; 
+    }
+
+    //for drop red color from prevue link 
+    let clear = document.querySelectorAll('.filter ul li');
+    for( let z = 0; z < clear.length; z++){
+        clear[z].style.color = "";
+    }
+
+    //painting the current link in red
+    let selector = 1 + parseInt(lnk);
+    let link = document.querySelector('.filter ul li:nth-child(' + selector +')');
+    link.style.color = "#fa6c65";
+
+}
+
+</script>
 </head>
 <body>
     <div class="grid-container">
         <div class="header">Moose</div>
-        <div class="contacts"><img alt="" src="img/tel.png"> <a href="tel:8-953-964-57-57">8-953-964-57-57</a> <img alt="" class="letter" src="img/letter.png"> em@il: bla-bla@mail.ru</div>
+        <div class="contacts"><img alt="" src="img/tel.png"> <a href="tel:8-953-964-57-57">8-953-964-57-57</a><br><img alt="" class="letter" src="img/letter.png"> em@il: bla-bla@mail.ru</div>
         <div class="nav grid">
             <div class="buttons">
                 <ul>
@@ -34,7 +63,7 @@
         <div class="slider grid">
                 <div><span class="h1 head-content">Moose brings awesomness</span></div><br>
                 <div><span class="head-content">A responsive template with clean and professional design</span></div><br>
-                <div><input type="button" value="see project" onclick=""> </div>
+                <div><input type="button" value="see project" onclick="window.location.href='#projects'"> </div>
         </div>
     </div>    
     <div class="second-container">    
@@ -55,16 +84,36 @@
             <div><a href="#"><img class="toCenter" alt="" src="img/pointer.png"><img alt="" 
                 src="img/illustr.png"><br>illustration</a></div>
         </div>
-        <div class="footer">Footer</div>
     </div>
-
+    <div class="portfolio grid">
+        <div class="latest">
+            <a name="projects"></a><span>Latest projects</span> | making stuff is awesome
+        </div>
+        <div class="filter">
+            <ul> <!--.graphics .web .illustation .audio .video--> 
+            <li><span onclick='return hide(".empty", ".web, .graphics, .illustration, .audio, .video", "0")'>all</span></li>
+            <li><span onclick='return hide(".graphics, .illustration, .audio, .video", ".web", "1")'>web design</span></li>
+            <li><span onclick='return hide(".web, .illustation, .audio, .video", ".graphics", "2")'>graphics</span></li>
+            <li><span onclick='return hide(".graphics, .web, .illustration, .audio", ".video", "3")'>video</span></li>
+            <li><span onclick='return hide(".graphics, .web, .audio, .video", ".illustration", "4")'>illustration</span></li>
+            <li><span onclick='return hide(".graphics, .web, .illustration, .video", ".audio", "5")'>audio</span></li>
+            </ul>
+        </div>
+        <div class="thumbnails grid">
+            <div alt="graphics" title="graphics" id="tmb1" class="graphics"></div>
+            <div alt="web design" title="web design" id="tmb2" class="web"></div>
+            <div alt="graphics" title="graphics" id="tmb3" class="graphics"></div>
+            <div alt="graphics" title="graphics" id="tmb4" class="graphics"></div>
+            <div alt="illustration" title="illustration" id="tmb5" class="illustration"></div>
+            <div alt="illustration" title="illustration" id="tmb6" class="illustration"></div>
+            <div alt="web design" title="web design" id="tmb7" class="web"></div>
+            <div alt="video" title="video" id="tmb8" class="video"></div>
+            <div alt="video" title="video" id="tmb9" class="video"></div>
+            <div alt="video" title="video" id="tmb10" class="video"></div>
+            <div alt="audio" title="audio" id="tmb11" class="audio"></div>
+            <div alt="audio" title="audio"id="tmb12" class="audio"></div>    
+        </div>
+    </div>
+    <script>hide(".empty", ".web, .graphics, .illustration, .audio, .video", "0");</script>
 </body>
 </html>
-
-<!--
-<div class="logo">four five six</div>
-<div class="contacts">seven eight</div>
-<div class="freemenu">nine ten</div>
-<div class="nav">eleven</div>
-<div class="socials">twelve</div>
-<div class="slider">777</div>-->
