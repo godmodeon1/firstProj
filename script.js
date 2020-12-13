@@ -1,4 +1,4 @@
-function hide(hid, shw, lnk) {
+function hide(push) {
     //CONDITIONS
     let CONDITIONS = ["0", ".empty", ".web, .graphics, .illustration, .audio, .video",
                   "1", ".graphics, .illustration, .audio, .video", ".web",
@@ -6,13 +6,15 @@ function hide(hid, shw, lnk) {
                   "3", ".graphics, .web, .illustration, .audio", ".video",
                   "4", ".graphics, .web, .audio, .video", ".illustration",
                   "5", ".graphics, .web, .illustration, .video", ".audio"]
-
+    let hid, shw, lnk;
     for( let i = 0, x = 0; i < CONDITIONS.length/3; i++){ 
-        alert("x:"+ x + " " + "conditions:" + " " + CONDITIONS[x])
+        if (push == CONDITIONS[x]) {
+            lnk = CONDITIONS[x];
+            hid = CONDITIONS[x+1];
+            shw = CONDITIONS[x+2];
+        }
         x = x + 3;
     }
-
-
     //find all what need to hide
     let toHide = document.querySelectorAll(hid);
     for( let i = 0; i < toHide.length; i++){ 

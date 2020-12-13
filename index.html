@@ -63,12 +63,12 @@
         </div>
         <div class="filter">
             <ul> <!--.graphics .web .illustation .audio .video--> 
-            <li><span onclick='hide(".empty", ".web, .graphics, .illustration, .audio, .video", "0")'>all</span></li>
-            <li><span onclick='hide(".graphics, .illustration, .audio, .video", ".web", "1")'>web design</span></li>
-            <li><span onclick='hide(".web, .illustation, .audio, .video", ".graphics", "2")'>graphics</span></li>
-            <li><span onclick='hide(".graphics, .web, .illustration, .audio", ".video", "3")'>video</span></li>
-            <li><span onclick='hide(".graphics, .web, .audio, .video", ".illustration", "4")'>illustration</span></li>
-            <li><span onclick='hide(".graphics, .web, .illustration, .video", ".audio", "5")'>audio</span></li>
+            <li><span onclick='hide("0")'>all</span></li>
+            <li><span onclick='hide("1")'>web design</span></li>
+            <li><span onclick='hide("2")'>graphics</span></li>
+            <li><span onclick='hide("3")'>video</span></li>
+            <li><span onclick='hide("4")'>illustration</span></li>
+            <li><span onclick='hide("5")'>audio</span></li>
             </ul>
         </div>
         <div class="thumbnails grid">
@@ -97,6 +97,6 @@
 
         </div>
     </div>
-    <script>hide(".empty", ".web, .graphics, .illustration, .audio, .video", "0");</script>
+    <script>hide("0");</script>
 </body>
 </html>
