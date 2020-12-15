@@ -437,7 +437,29 @@ li {
   .thumbnails div:hover {
     transform: scale(1.01);
     transition: transform 0.3s ease;
+  }
+
+  @keyframes imgViewOpacity {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+   }
+
+  .imgView {
+    position:absolute;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: right;
+    padding: 7px 7px;
+    border: 1px solid black;
+    animation: imgViewOpacity 0.5s ease forwards;
   } 
+  .imgView input {
+    font-size: 1em;
+    padding: 0px 5px;
+    color: black;
+    background-color: #fff;
+    opacity: 0.5;
+    text-transform: lowercase;
+  }
   #tmb1 {
     background: url(img/tmb/tmb1.png) no-repeat;
     background-size: cover;
