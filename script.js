@@ -102,8 +102,8 @@ function blogSlider() {
     let countItems = document.querySelectorAll('.blogSlider__item').length;
 
     //get length of step
-    let slideStep = 31.6667;
-    let currentStep = 0;
+    let slideStep = "((100vw - (100vw - 100%))/3 - 0.45vw)";
+    let currentStep = "0px";
 
     //listener
     nextBtn.addEventListener("click", () => changeSlide('next'), false);
@@ -111,7 +111,7 @@ function blogSlider() {
     //change Slide 
     function changeSlide(val) {
         if (val == "next") {
-            currentStep = currentStep - slideStep;
+            currentStep =  currentStep + " +  -1 *" + slideStep;
         } else {
             if (currentStep == 0) {
                 currentStep = -slideStep*(countItems-3)
@@ -119,10 +119,12 @@ function blogSlider() {
                 currentStep = currentStep + slideStep;
             }
         }
-
-        if (currentStep < -slideStep*(countItems-3)) {
-            currentStep = 0;
-        }
-        item.style.transform = 'translateX(' + currentStep + 'vw)';
+        alert(currentStep);
+//        if (currentStep < -slideStep*(countItems-3)) {
+//            currentStep = 0;
+//        }
+        let wtf = 'translateX(calc(' + currentStep + '))';
+        console.log(wtf);
+        item.style.transform = wtf;
 }    
 }
