@@ -97,12 +97,12 @@ function blogSlider() {
     let item = document.querySelector('.blogSlider__wrap');
     let nextBtn = document.querySelector('.next');
     let prevBtn = document.querySelector('.prev');
-    
+    let pushPos = 1;
     //count items
     let countItems = document.querySelectorAll('.blogSlider__item').length;
 
     //get length of step
-    let slideStep = "((100vw - (100vw - 100%))/3 - 0.45vw)";
+    let slideStep = "(100vw/3 - 1vw + 2px)";
     let currentStep = "0px";
 
     //listener
@@ -111,18 +111,21 @@ function blogSlider() {
     //change Slide 
     function changeSlide(val) {
         if (val == "next") {
+            pushPos++;
             currentStep =  currentStep + " +  -1 *" + slideStep;
-        } else {
-            if (currentStep == 0) {
-                currentStep = -slideStep*(countItems-3)
+        } else if (val == "prev") {
+            pushPos--;
+            if (currentStep == "0px" || currentStep == CALCMINSTEP )  {
+                currentStep = "-1*" + slideStep + "*" + (countItems-3);
             } else {
-                currentStep = currentStep + slideStep;
+                currentStep = currentStep + " + " + slideStep;
             }
         }
-        alert(currentStep);
-//        if (currentStep < -slideStep*(countItems-3)) {
-//            currentStep = 0;
-//        }
+        if (pushPos > countItems-2) {pushPos = 1; currentStep = "0px";}
+        if (pushPos < 1) {pushPos = countItems-2; currentStep = "-1 * " + slideStep + " * " + (countItems-3)}
+
+        alert(pushPos);
+
         let wtf = 'translateX(calc(' + currentStep + '))';
         console.log(wtf);
         item.style.transform = wtf;
