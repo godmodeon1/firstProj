@@ -75,8 +75,14 @@ select {
 	font-family:inherit;
 	font-size:inherit;
 	font-weight:inherit;
-	*font-size:100%; /*to enable resizing for IE*/
+  *font-size:100%; /*to enable resizing for IE*/
+  outline:none;
 }
+input:active, textarea:active {
+  outline:none;
+}
+:focus {outline:none;}
+
 /*because legend doesn't inherit in IE */
 legend {
 	color:#000;
@@ -159,7 +165,7 @@ li {
   .nav {
     grid-area: nav;
     grid-template-rows: 1fr;
-    grid-template-columns: 12.5% 1fr 0.2fr  12.5%;
+    grid-template-columns: 12.5% 1fr 0.2fr 12.5%;
     grid-template-areas: 
     '. buttons socials .';
     align-items: center;
@@ -263,7 +269,7 @@ li {
   }
   .second-container {
     display: grid; /* элемент отображается как блочный   grid-контейнер */
-    grid-template-rows: 140px 200px; /* определяем количество и ширину строк в макете сетки */
+    grid-template-rows: auto 200px; /* определяем количество и ширину строк в макете сетки */
     grid-template-columns: repeat(8, 1fr); /* определяем количество и ширину столбцов в макете сетки */
     grid-template-areas:
     '. slogan slogan slogan slogan slogan slogan .'
@@ -357,7 +363,7 @@ li {
     margin: 0 auto;
   }
   .portfolio {
-    grid-template-rows: 90px 4.2vw 50vw; 
+    grid-template-rows: 90px 4.2vw auto; 
     grid-template-columns: repeat(8, 1fr);
     grid-template-areas:
       '. latest latest latest latest latest latest .' /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
@@ -372,13 +378,14 @@ li {
     align-self: end;
     margin-bottom: 30px;
   }
-  .latest span {
+  .latest h2 {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 0.9em;
+    font-size: 0.9rem;
     color: #fa6c65;
+    display: inline;
   }
   .filter {
     grid-area: filter;
@@ -411,10 +418,12 @@ li {
     padding: 0 100px;
     grid-area: thumbnails;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 16.38vw 16.38vw 16.38vw;
+    grid-template-rows: auto;
     justify-items: center;
     justify-content: center;
     grid-gap: 7px;
+    align-self: start;
+
   }
   .thumbnails div {
     width: 21vw;
@@ -451,6 +460,7 @@ li {
     padding: 7px 7px;
     border: 1px solid black;
     animation: imgViewOpacity 0.5s ease forwards;
+    box-shadow: 0 0 3vw #fff;
   } 
   .imgView input {
     font-size: 1em;
@@ -460,6 +470,7 @@ li {
     opacity: 0.5;
     text-transform: lowercase;
   }
+  
   #tmb1 {
     background: url(img/tmb/tmb1.png) no-repeat;
     background-size: cover;
@@ -521,14 +532,97 @@ li {
     background-position: center; 
   }
   .blog {
-    grid-template-columns: ;
-    grid-template-rows: ;
-    grid-template-areas: ;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+    '. . blog-content blog-content blog-content blog-content . .'
+    'blog-slider blog-slider blog-slider blog-slider blog-slider blog-slider blog-slider blog-slider'
+    'blog-button blog-button blog-button blog-button blog-button blog-button blog-button blog-button';
     justify-items: center;
     justify-content: center;
-    grid-gap: 7px;
+    font-size: 0.8em;
+    text-align: center;
+    line-height: 2em;
+    padding-top: 2.5vw;
+    background-color: #fbfbfb;
   }
-
+  .blog-content {
+    grid-area: blog-content;
+  }
+  .blog-content h2 {
+    line-height: 2.5rem;
+  }
+  .blogSlider {
+    grid-area: blog-slider;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .blog-button {
+    grid-area: blog-button;
+  }
+  .blogSlider__wrap {
+    height: 29vw;
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    transition: transform 0.3s ease;
+  }
+  .blogSlider__item {
+    flex: 0 0 calc((100vw - (100vw - 100%))/3 - 4vw);
+    height: 25.711vw;
+    margin-left: 1vw;
+    background: #fff;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 0.005vw solid #fff;
+    cursor: pointer;
+    padding: 0.9vw;
+  }
+  .blogSlider__item:hover {
+    border: 0.005vw solid darkgray;
+  }
+  .blogSlider__item h3 {
+    font-weight: bold;
+  }
+  .blogSlider__item p {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #9f9f9f;
+  }
+  .blogSlider__item img {
+    width: 29.6667vw;
+    height: 19.7752vw;
+    padding-bottom: 0.5em;
+  }
+  .btn {
+    display: block;
+    position: absolute;
+    top: 40%;
+    border: 1px solid gray;
+    background: #fbfbfb;
+    opacity: 0.35;
+    line-height: 3vw;
+    width: 3vw;
+    height: 3vw;
+    z-index: 2;
+    cursor: pointer;  
+    font-size: 2em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  .btn:hover {
+    opacity: 0.6;
+  }
+  .btn span {
+    display: inline-block;
+    transform: scaleX(0.3);
+  }
+  .prev {
+    left: 0;
+  }
+  .next {
+    right: 0;
+  }
   @media screen and (min-width: 1331px) { /* for all screen biggest than 1331px */
     .contacts br {
       display: none;
@@ -545,7 +639,7 @@ li {
 
   @media screen and (max-width: 1053px) {
     .second-container {
-      grid-template-rows: 160px 200px; /* определяем количество и ширину строк в макете сетки */
+      grid-template-rows: auto 200px; /* определяем количество и ширину строк в макете сетки */
     }
     .contacts br {
       display: none;

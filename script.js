@@ -1,4 +1,7 @@
+//FOR thumbnail filter 
 function hide(push) {
+    //close old imgViews if need
+    closeView();
     //CONDITIONS
     let CONDITIONS = ["0", ".empty", ".web, .graphics, .illustration, .audio, .video",
                   "1", ".graphics, .illustration, .audio, .video", ".web",
@@ -39,12 +42,10 @@ function hide(push) {
     link.style.color = "#fa6c65";
 }
 
+//Scale img from thumbnails and set to center
 function imageViewer(id) {
-    //close old window if need
-    if (document.querySelector(".imgView") != null) {
-        let toRm = document.querySelector(".imgView");
-        toRm.remove();
-    }
+    //close old imgView
+    closeView();
 
     //get URL
     element = document.querySelector("#" + id);
@@ -68,13 +69,60 @@ function imageViewer(id) {
     //create imgView
     let view = document.createElement('div');
     view.classList.add("imgView")
-    view.innerHTML = "<input type='button' alt='='Закрыть'' title='Закрыть' value='X' onclick='rmElem(this.parentNode.className)'>";
+    view.innerHTML = "<input type='button' alt='='Закрыть'' title='Закрыть' value='X' onclick='closeView()'>";
     view.style.cssText = "top:" + topPosition + "px; left:" + leftPosition + "px; width:" + 
             imgWidth + "px; height:" + imgHeight + "px; background: url(" + imgUrl + "); background-size: cover;";
     document.body.append(view);
 
 }
-function rmElem(id) {
-    let toRm = document.querySelector("." + id);
-    toRm.remove();
+
+//turn off the imgView
+function closeView() {
+    //close old window if need
+       if (document.querySelector(".imgView") != null) {
+        let toRm = document.querySelector(".imgView");
+        toRm.remove();
+    }
+}
+
+//turn off the imgView by the press ESC
+window.onkeydown = function( event ) {
+    closeView();
+    if ( event.keyCode == 27 ) {
+    }
+};
+
+function blogSlider() {
+
+    let item = document.querySelector('.blogSlider__wrap');
+    let nextBtn = document.querySelector('.next');
+    let prevBtn = document.querySelector('.prev');
+    
+    //count items
+    let countItems = document.querySelectorAll('.blogSlider__item').length;
+
+    //get length of step
+    let slideStep = 31.6667;
+    let currentStep = 0;
+
+    //listener
+    nextBtn.addEventListener("click", () => changeSlide('next'), false);
+    prevBtn.addEventListener("click", () => changeSlide('prev'), false);
+    //change Slide 
+    function changeSlide(val) {
+        if (val == "next") {
+            currentStep = currentStep - slideStep;
+        } else {
+            if (currentStep == 0) {
+                currentStep = -slideStep*(countItems-3)
+            } else {
+                currentStep = currentStep + slideStep;
+            }
+        }
+
+        if (currentStep < -slideStep*(countItems-3)) {
+            currentStep = 0;
+        }
+        item.style.transform = 'translateX(' + currentStep + 'vw)';
+}    
 }
