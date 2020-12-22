@@ -98,8 +98,17 @@ function blogSlider() {
     let nextBtn = document.querySelector('.next');
     let prevBtn = document.querySelector('.prev');
     let pushPos = 1;
+    let btnBlock = document.querySelector(".blog-button");
     //count items
     let countItems = document.querySelectorAll('.blogSlider__item').length;
+    
+    //make the pushPosDots
+    for (let i=0; i < countItems-2; i++) {
+        let btnSpan = document.createElement('span');
+        btnSpan.classList.add("pushDots")
+        btnSpan.innerHTML = "&bull;";
+        btnBlock.appendChild(btnSpan);   
+    }
 
     //get length of step
     let slideStep = "(100vw/3 - 1vw + 2px)";
@@ -108,26 +117,34 @@ function blogSlider() {
     //listener
     nextBtn.addEventListener("click", () => changeSlide('next'), false);
     prevBtn.addEventListener("click", () => changeSlide('prev'), false);
-    //change Slide 
+    item.addEventListener("mouseout", () => timerStart(), false);
+    item.addEventListener("mouseover", function() {clearInterval(intervalID);}, false);
+
+    //timer
+    let intervalID;
+    function timerStart() {
+    intervalID = setInterval(changeSlide, 3000, 'next');
+}
+
+    timerStart()
+
+    //change Slide `
     function changeSlide(val) {
         if (val == "next") {
             pushPos++;
-            currentStep =  currentStep + " +  -1 *" + slideStep;
-        } else if (val == "prev") {
+            btnBlock.childNodes[pushPos-1].style.color = "darkgray";
+        } 
+        if (val == "prev") {
             pushPos--;
-            if (currentStep == "0px" || currentStep == CALCMINSTEP )  {
-                currentStep = "-1*" + slideStep + "*" + (countItems-3);
-            } else {
-                currentStep = currentStep + " + " + slideStep;
-            }
+            btnBlock.childNodes[pushPos+1].style.color = "darkgray";
         }
+        currentStep = (pushPos-1) + " * (-1) * " + slideStep;
         if (pushPos > countItems-2) {pushPos = 1; currentStep = "0px";}
         if (pushPos < 1) {pushPos = countItems-2; currentStep = "-1 * " + slideStep + " * " + (countItems-3)}
-
-        alert(pushPos);
-
-        let wtf = 'translateX(calc(' + currentStep + '))';
-        console.log(wtf);
-        item.style.transform = wtf;
+    
+    //style
+    btnBlock.childNodes[pushPos].style.color = "gray";
+    let wtf = 'translateX(calc(' + currentStep + '))';
+    item.style.transform = wtf;
 }    
 }

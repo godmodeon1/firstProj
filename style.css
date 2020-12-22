@@ -560,9 +560,13 @@ li {
   }
   .blog-button {
     grid-area: blog-button;
+    align-self: center;
+    line-height: 0px;
+    padding-top: 20px;
+    padding-bottom: 3em;
   }
   .blogSlider__wrap {
-    height: 29vw;
+    height: calc(33.333vw*0.75 + 2vw + 2px);
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
@@ -622,6 +626,52 @@ li {
   }
   .next {
     right: 0;
+  }
+  .pushDots {
+    color: darkgray;
+    font-size: 36px;
+  }
+  .footer {
+    background-color: #303538;
+    grid-template-rows: auto;
+    grid-template-columns: 0.5fr repeat(4, 1fr) 0.5fr;
+    grid-gap: 0px;
+    grid-template-areas: '. touch twitter popular about .'
+    'emptycopy copyright copyright copyright copyright copyright';
+    font-size: 0.8em;
+    color: #cacaca;
+  }
+  .footer h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-bottom: 1em;
+  }
+  .footer div {
+    padding: 20px;
+  } 
+  .touch {
+    grid-area: touch;
+  }
+  .twitter {
+    grid-area: twitter;
+  }
+  .popular {
+    grid-area: popular;
+  }
+  .about{
+    grid-area: about;
+  }
+  .emptycopy {
+    background-color: #2d3134;
+    grid-area: emptycopy;
+  }
+  .copyright {
+    grid-gap: 0;
+    background-color: #2D3134;
+    padding: 20px 0;
+    grid-area: copyright;
   }
   @media screen and (min-width: 1331px) { /* for all screen biggest than 1331px */
     .contacts br {
