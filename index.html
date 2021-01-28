@@ -33,8 +33,8 @@
             </div>
         </div>
         <div class="slider grid">
-                <div><span class="h1 head-content">Moose brings awesomness</span></div><br>
-                <div><span class="head-content">A responsive template with clean and professional design</span></div><br>
+                <div><span class="h1 head-content">Moose brings awesomness</span></div>
+                <div><span class="head-content">A responsive template with clean and professional design</span></div>
                 <div><input type="button" value="see project" onclick="window.location.href='#projects'"> </div>
         </div>
     </div>    
@@ -62,7 +62,7 @@
             <a name="projects"></a><h2>Latest projects</h2> | making stuff is awesome
         </div>
         <div class="filter">
-            <ul> <!--.graphics .web .illustation .audio .video--> 
+            <ul> 
             <li><span onclick='hide("0")'>all</span></li>
             <li><span onclick='hide("1")'>web design</span></li>
             <li><span onclick='hide("2")'>graphics</span></li>
@@ -72,20 +72,21 @@
             </ul>
         </div>
         <div class="thumbnails grid">
-            <div tabindex="0" alt="graphics" title="graphics" id="tmb1" onclick="imageViewer(this.id)" class="graphics"></div>
-            <div tabindex="0" alt="web design" title="web design" id="tmb2" onclick="imageViewer(this.id)" class="web"></div>
-            <div tabindex="0" alt="graphics" title="graphics" id="tmb3" onclick="imageViewer(this.id)" class="graphics"></div>
-            <div tabindex="0" alt="graphics" title="graphics" id="tmb4" onclick="imageViewer(this.id)" class="graphics"></div>
-            <div tabindex="0" alt="illustration" title="illustration" id="tmb5" onclick="imageViewer(this.id)" class="illustration"></div>
-            <div tabindex="0" alt="illustration" title="illustration" id="tmb6" onclick="imageViewer(this.id)" class="illustration"></div>
-            <div tabindex="0" alt="web design" title="web design" id="tmb7" onclick="imageViewer(this.id)" class="web"></div>
-            <div tabindex="0" alt="video" title="video" id="tmb8" onclick="imageViewer(this.id)" class="video"></div>
-            <div tabindex="0" alt="video" title="video" id="tmb9" onclick="imageViewer(this.id)" class="video"></div>
-            <div tabindex="0" alt="video" title="video" id="tmb10" onclick="imageViewer(this.id)" class="video"></div>
-            <div tabindex="0" alt="audio" title="audio" id="tmb11" onclick="imageViewer(this.id)" class="audio"></div>
-            <div tabindex="0" alt="audio" title="audio"id="tmb12" onclick="imageViewer(this.id)" class="audio"></div>    
+            <div tabindex="0" alt="graphics" title="graphics" id="tmb1" onclick="imageViewer(this.id)" class="graphics thmb"></div>
+            <div tabindex="0" alt="web design" title="web design" id="tmb2" onclick="imageViewer(this.id)" class="web thmb"></div>
+            <div tabindex="0" alt="graphics" title="graphics" id="tmb3" onclick="imageViewer(this.id)" class="graphics thmb"></div>
+            <div tabindex="0" alt="graphics" title="graphics" id="tmb4" onclick="imageViewer(this.id)" class="graphics thmb"></div>
+            <div tabindex="0" alt="illustration" title="illustration" id="tmb5" onclick="imageViewer(this.id)" class="illustration thmb"></div>
+            <div tabindex="0" alt="illustration" title="illustration" id="tmb6" onclick="imageViewer(this.id)" class="illustration thmb"></div>
+            <div tabindex="0" alt="web design" title="web design" id="tmb7" onclick="imageViewer(this.id)" class="web thmb"></div>
+            <div tabindex="0" alt="video" title="video" id="tmb8" onclick="imageViewer(this.id)" class="video thmb"></div>
+            <div tabindex="0" alt="video" title="video" id="tmb9" onclick="imageViewer(this.id)" class="video thmb"></div>
+            <div tabindex="0" alt="video" title="video" id="tmb10" onclick="imageViewer(this.id)" class="video thmb"></div>
+            <div tabindex="0" alt="audio" title="audio" id="tmb11" onclick="imageViewer(this.id)" class="audio thmb"></div>
+            <div tabindex="0" alt="audio" title="audio"id="tmb12" onclick="imageViewer(this.id)" class="audio thmb"></div>    
         </div>
     </div>
+    <input id="showHide" value="Показать еще" type="button">
     <div class="blog grid">
         <div class="blog-content latest">
             <h2>Our latest blog</h2>
@@ -96,24 +97,24 @@
             <div alt="next" title="next" class="next btn"><span>&gt;</span></div>
             <div class="blogSlider__wrap">
                 <div id="slide" class="blogSlider__item"><img alt="" src="img/slide1.png">
-                    <h3>Tortor ullamcorper fringilla euismod</h3>
-                    <p>20 dec 2020 | Macro, photography</p>
+                    <br><h3>Tortor ullamcorper fringilla euismod</h3>
+                    <br><p>20 dec 2020 | Macro, photography</p>
                 </div>
                 <div class="blogSlider__item"><img alt="" src="img/slide2.png">
-                    <h3>Tortor ullamcorper fringilla euismod</h3>
-                    <p>20 dec 2020 | Macro, photography</p>
+                    <br><h3>Tortor ullamcorper fringilla euismod</h3>
+                    <br><p>20 dec 2020 | Macro, photography</p>
                 </div>
                 <div class="blogSlider__item"><img alt="" src="img/slide3.png">
-                    <h3>Tortor ullamcorper fringilla euismod</h3>
-                    <p>20 dec 2020 | Macro, photography</p>
+                    <br><h3>Tortor ullamcorper fringilla euismod</h3>
+                    <br><p>20 dec 2020 | Macro, photography</p>
                 </div>
                 <div class="blogSlider__item"><img alt="" src="img/slide4.png">
-                    <h3>Tortor ullamcorper fringilla euismod</h3>
-                    <p>20 dec 2020 | Macro, photography</p>
+                    <br><h3>Tortor ullamcorper fringilla euismod</h3>
+                    <br><p>20 dec 2020 | Macro, photography</p>
                 </div>
                 <div class="blogSlider__item"><img alt="" src="img/slide5.jpg">
-                    <h3>Tortor ullamcorper fringilla euismod</h3>
-                    <p>20 dec 2020 | Macro, photography</p>
+                    <br><h3>Tortor ullamcorper fringilla euismod</h3>
+                    <br><p>20 dec 2020 | Macro, photography</p>
                 </div>
             </div>
         </div>
@@ -149,6 +150,6 @@
         </div>
     </div>
     <script>hide("0");</script>
-    <script>blogSlider()</script>
+    <script>blogSlider();</script>
 </body>
 </html>

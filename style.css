@@ -134,6 +134,7 @@ li {
     align-items: center;
 }
 
+
   .grid-container > div {
     text-align: center; /* горизонтальное выравнивание текста */
   }
@@ -238,9 +239,10 @@ li {
     font-size: 2em;
     color: #272727; 
     position: relative;
-    min-height: calc(100vh - 11vh - 40px);
+    min-height: calc(100vh - 80px - 40px);
+    grid-gap: 40px 0;
   }
-  .slider div:nth-child(3) {
+  .slider div:nth-child(2) {
     font-size: 0.75em;
   }
   input {
@@ -370,13 +372,19 @@ li {
       '. filter filter filter filter filter filter .' /* точка обозначает элемент без имени */
       'thumbnails thumbnails thumbnails thumbnails thumbnails thumbnails thumbnails thumbnails'; /* точка обозначает элемент без имени */
     align-items: center;
-    padding-bottom: 4.22vw;
+    padding-bottom: 2.22vw;
+  }
+  #showHide {
+    font-size: 0.5em;
+    display: none;
+    margin: 0 auto;
+    margin-bottom: 2.22vw;
   }
   .latest {
     grid-area: latest;
     justify-self: center;
     align-self: end;
-    margin-bottom: 30px;
+    margin: 30px 0;
   }
   .latest h2 {
     text-transform: uppercase;
@@ -415,15 +423,14 @@ li {
     margin-left: 0px;
   }
   .thumbnails {
-    padding: 0 100px;
+    margin: 0 auto;
     grid-area: thumbnails;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
     justify-items: center;
     justify-content: center;
-    grid-gap: 7px;
     align-self: start;
-
+    grid-gap: 7px;
   }
   .thumbnails div {
     width: 21vw;
@@ -543,7 +550,6 @@ li {
     font-size: 0.8em;
     text-align: center;
     line-height: 2em;
-    padding-top: 2.5vw;
     background-color: #fbfbfb;
   }
   .blog-content {
@@ -566,7 +572,6 @@ li {
     padding-bottom: 3em;
   }
   .blogSlider__wrap {
-    height: calc(33.333vw*0.75 + 2vw + 2px);
     width: 100%;
     display: flex;
     flex-wrap: nowrap;
@@ -574,25 +579,33 @@ li {
   }
   .blogSlider__item {
     flex: 0 0 calc(100vw/3 - 4vw);
-    height: calc(33.333vw*0.75);
     background: #fff;
     text-transform: uppercase;
     font-family: Arial, Helvetica, sans-serif;
     border: 1px solid #fff;
     cursor: pointer;
     margin-left: 1vw;
-    padding: 1vw;
+    padding: 1vw 1vw 0 1vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .blogSlider__item:hover {
     border: 1px solid darkgray;
   }
   .blogSlider__item h3 {
     font-weight: bold;
+    display: inline;
+    line-height: 1em;
   }
   .blogSlider__item p {
     font-size: 0.9em;
     font-weight: bold;
     color: #9f9f9f;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display:inline;
   }
   .blogSlider__item img {
     width: 100%;
@@ -646,6 +659,7 @@ li {
     font-size: 1.2em;
     font-weight: bold;
     text-transform: uppercase;
+    text-shadow: 0 2px 5px gray;
     padding-bottom: 1em;
   }
   .footer div {
@@ -674,17 +688,17 @@ li {
     grid-area: copyright;
   }
   @media screen and (min-width: 1331px) { /* for all screen biggest than 1331px */
-    .contacts br {
-      display: none;
-    }
+  .contacts br {
+    display: none;
+  }
   }
   @media screen and (max-width: 1330px) { /* for all screen smaller than 1331, but look at next limit */
-    .slogan {
-      padding: 0;
-    }
-    .contacts br {
-      display: none;
-    }
+  .slogan {
+    padding: 0;
+  }
+  .contacts br {
+    display: none;
+  }
   }
 
   @media screen and (max-width: 1053px) {
@@ -700,7 +714,9 @@ li {
       '. slogan slogan slogan slogan slogan slogan .'
       '. services services services services services services .';
       }
-
+    .blogSlider__item {
+      font-size: 0.9em;
+    }
 
   }
   @media screen and (max-width: 900px) {
@@ -733,17 +749,36 @@ li {
     }
   }
   @media screen and (max-width: 820px) {
+    .contacts {
+      text-align: left !important;
+    }
+    .letter {
+      margin: 0px;
+    }
+    .second-container {
+      font-size: 0.9rem;
+    }
+
+    .blog {
+      grid-template-areas: 
+      '. blog-content blog-content blog-content blog-content blog-content blog-content .'
+      'blog-slider blog-slider blog-slider blog-slider blog-slider blog-slider blog-slider blog-slider'
+      'blog-button blog-button blog-button blog-button blog-button blog-button blog-button blog-button';
+    }
     .portfolio {
-      grid-template-rows: 90px 4.2vw 93vw; 
+      grid-template-rows: auto; 
       grid-template-columns: 20px repeat(6, 1fr) 20px;
       grid-template-areas:
         '. latest latest latest latest latest latest .' /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
         '. filter filter filter filter filter filter .' /* точка обозначает элемент без имени */
         'thumbnails thumbnails thumbnails thumbnails thumbnails thumbnails thumbnails thumbnails'; /* точка обозначает элемент без имени */
     }
+    .filter {
+      font-size: 0.7rem;
+    }
     .thumbnails {
       grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: repeat(4, 22.5vw);
+      grid-template-rows: auto;
       justify-items: center;
       justify-content: center;
       grid-gap: 7px;
@@ -752,5 +787,142 @@ li {
       width: 30vw;
       height: 22.5vw;
       border: solid 1px black;
+    }
+    .footer {
+      grid-template-rows: auto;
+      grid-template-columns: 0.2fr repeat(2, 1fr) 0.2fr;
+      grid-gap: 0px;
+      grid-template-areas: '. touch twitter .'
+      '. popular about .'
+      'emptycopy copyright copyright copyright';
+      font-size: 0.8em;
+      color: #cacaca;
+    }
+    .blogSlider__item {
+      font-size: 0.8em;
+      padding-bottom:10px;
     }  
   }
+  @media screen and (max-width: 750px) {
+  .slider {
+    font-size: 1.6em;
+  }
+  }
+  @media screen and (max-width: 592px) {
+  .grid-container {
+    display: grid; /* элемент отображается как блочный   grid-контейнер */
+    grid-template-rows: auto; /* определяем количество и ширину строк в макете сетки */
+    grid-template-columns: repeat(4, 1fr); /* определяем количество и ширину столбцов в макете сетки */
+    grid-template-areas:
+      'contacts contacts contacts contacts'
+      'header header header header'; /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
+    align-items: center;
+    background-color: #C7D0D9;
+  }
+  .slider {display:none;}
+  .nav {display: none;}
+
+  .header {
+    background-color: #C7D0D9;
+    padding: 5px 0;
+    justify-self: center;
+    text-shadow: 0 2px 8px #fff;
+  }
+  .contacts {
+    text-align: center !important;
+    min-width: 310px;
+    padding: 10px 0;
+    background-color: #fff;
+  }
+  .contacts br {
+    display: none;
+  }
+  .contacts img:last-child {
+    margin-left: 20px;
+  }
+  .second-container {
+    grid-template-rows: auto; /* определяем количество и ширину строк в макете сетки */
+    grid-template-columns: repeat(4, 1fr); /* определяем количество и ширину столбцов в макете сетки */
+    grid-template-areas:
+    'slogan slogan slogan slogan'
+    'services services services services';
+    align-items: center;
+    justify-content: center;
+    background-color: #fbfbfb;
+    padding: 0 20px;
+  }
+  .slogan {
+    padding-bottom: 30px;
+  }
+  .slogan h2 {
+    font-size: 1.3em;
+    padding: 1em 0;
+  } 
+  .services div {
+    height: 130px;
+    margin-top: 20px;
+  }
+  .services img:nth-child(2) {
+    padding: 15px;
+  }
+  .services a {
+    left: -35px;
+  }
+  .services a:hover img:nth-child(2) {
+    background-color: #fa6c65;
+    width: 33px;
+    height: 33px;
+    padding: 15px;
+  }
+  .portfolio {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 'latest latest latest latest'
+    'filter filter filter filter'
+    'thumbnails thumbnails thumbnails thumbnails';
+  }
+  .latest {
+    text-align: center;
+  }
+  .filter {
+    text-align: center; 
+    width: 70%;
+    min-height: 120px; 
+    margin-bottom: 25px;
+  }
+  .filter ul {
+    min-height: 120px;
+  }
+  .filter ul li {
+    float: left; 
+    display:block; 
+    width: 50%; 
+    font-size: 1.5em;
+    max-height: 41px;
+  }
+  .filter ul li::before {
+    content: '•';
+    margin-left: 0px;
+    font-size: 2em;
+    padding-right: 3px;
+    color: #fa6c65;
+    text-align:center;
+  }
+  .thumbnails {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .thumbnails div {
+    width: 42vw;
+    height: 32.76vw;
+  }
+  .btn {
+    width: 10vw;
+    height: 10vw;
+    line-height: 10vw;
+  }
+  .blogSlider__item {
+    flex: 0 0 calc(100% - 4% - 2px);
+    margin: 0 1%;
+    padding: 1%;
+  }
+}

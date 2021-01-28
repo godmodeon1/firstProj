@@ -1,14 +1,31 @@
-//FOR thumbnail filter 
+'use strict';
+
+//get screenMode 
+
+function widthScreen() {
+    const widthSmaller592 = window.matchMedia('(max-width: 592px)'); // for smaller than 592
+    const widthSmaller820 = window.matchMedia('(max-width: 820px)'); // for smaller than 820
+    const widthBiggest821 = window.matchMedia('(min-width: 821px)'); //for biggest than 821
+    let screenMode;
+    if (widthSmaller820.matches) {screenMode = "M";} // for smaller than 820
+    if (widthSmaller592.matches) {screenMode = "S";} // for smaller than 592
+    if (widthBiggest821.matches) {screenMode = "L";} //for biggest than 821
+    return screenMode;
+}
+
+//FOR thumbnail filter
+
 function hide(push) {
     //close old imgViews if need
     closeView();
     //CONDITIONS
+
     let CONDITIONS = ["0", ".empty", ".web, .graphics, .illustration, .audio, .video",
                   "1", ".graphics, .illustration, .audio, .video", ".web",
                   "2", ".web, .illustration, .audio, .video", ".graphics",
                   "3", ".graphics, .web, .illustration, .audio", ".video",
                   "4", ".graphics, .web, .audio, .video", ".illustration",
-                  "5", ".graphics, .web, .illustration, .video", ".audio"]
+                  "5", ".graphics, .web, .illustration, .video", ".audio"];
     let hid, shw, lnk;
     for( let i = 0, x = 0; i < CONDITIONS.length/3; i++){ 
         if (push == CONDITIONS[x]) {
@@ -40,16 +57,162 @@ function hide(push) {
     let selector = 1 + parseInt(lnk);
     let link = document.querySelector('.filter ul li:nth-child(' + selector +')');
     link.style.color = "#fa6c65";
+
+    //call func for hide part of thumbnails
+    countThumb('hide', '1');
 }
 
-//Scale img from thumbnails and set to center
+//Adaptation thumbnails for small screen(hide half elements) ===================================================
+
+// GLOBAL
+    let shwdElems = []; //elems display:block now
+    let counter = 0; //num of shwdElems
+
+// END GLOBAL
+
+function countThumb(status, tab) { // PLEASE rename func!!!
+
+    let elem = document.querySelector('.thumbnails');
+    let btn = document.getElementById('showHide');
+    let screenMode = widthScreen();
+
+   if (tab == 1) {test2hide();} //if page reload or changed filter
+    
+    function test2hide() { //seek not hidden elems
+        shwdElems = [];
+        counter = 0;
+
+        for (let i=0; i<elem.childNodes.length; i++) {
+            try {
+                let display = elem.childNodes[i].style.display;
+                if (display == 'block') {
+                    shwdElems.push(i);
+                }
+            } catch {}
+        }
+        window.shwdElems = shwdElems;
+        counter = shwdElems.length;
+        window.counter = counter;
+        return counter, shwdElems;
+    }
+
+    if (screenMode == "M") { //smaller than 820 (3 colums)
+        if (status == 'hide') {statusHide();} else if (status == 'show') {statusShow();} else {console.log('ERROR');}
+
+        function statusHide() {
+            if (counter > 6) {
+                for (let i = counter - 1; i>=6; i--) {
+                    elem.childNodes[shwdElems[i]].style.display = "none";
+                }
+                btn.style.display = "block";
+                btn.value = "Показать еще";
+                btn.setAttribute('onclick','countThumb("show", "0")');
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function statusShow() {
+            for (let i = window.counter - 1; i>=6; i--) {
+                elem.childNodes[window.shwdElems[i]].style.display = "block";
+            }   
+            btn.style.display = "block";
+            btn.value = "Скрыть";
+            btn.setAttribute('onclick','countThumb("hide", "0")');
+        }
+    }
+}
+
+// blogslider ===================================================================================================
+
+
+function blogSlider() {
+
+    let item = document.querySelector('.blogSlider__wrap');
+    let nextBtn = document.querySelector('.next');
+    let prevBtn = document.querySelector('.prev');
+    let pushPos = 1;
+    let pushCount = 0;
+    let step, slideStep, currentStep, toRm, screenMode, countItems;
+    let btnBlock = document.querySelector(".blog-button");
+
+    //count div items in BlogSlider
+    countItems = document.querySelectorAll('.blogSlider__item').length;
+
+    //pushPosDots
+        //close OLD dots if need
+    if (document.querySelector(".pushDots") != null) {
+        toRm = document.querySelector(".pushDots");
+        toRm.remove();
+    }
+
+    //get screenMode from fucnc
+    screenMode = widthScreen();
+    console.log("screenMode: " + screenMode);
+    //get length of step
+    if (screenMode == "S") {
+        pushCount = countItems;
+        slideStep = document.documentElement.clientWidth + "px";
+    } else {
+        pushCount = countItems-2;
+        slideStep = document.documentElement.clientWidth / 3 + "px";
+    }
+
+    currentStep = "0px";
+
+    //make NEW dots
+    for (let i=0; i < pushCount; i++) {
+        let btnSpan = document.createElement('span');
+        btnSpan.classList.add("pushDots");
+        btnSpan.innerHTML = "&bull;";
+        btnBlock.appendChild(btnSpan);   
+    }    
+
+    //listener
+    nextBtn.addEventListener("click", () => changeSlide('next'), false);
+    prevBtn.addEventListener("click", () => changeSlide('prev'), false);
+    item.addEventListener("mouseout", () => timerStart(), false);
+    item.addEventListener("mouseover", function() {clearInterval(intervalID);}, false);
+
+    //timer
+    let intervalID;
+    function timerStart() {
+    intervalID = setInterval(changeSlide, 3000, 'next');
+    }
+
+    timerStart();
+
+    //change Slide
+    function changeSlide(val) {
+        if (val == "next") {
+            pushPos++;
+            btnBlock.childNodes[pushPos-1].style.color = "darkgray";
+        } 
+        if (val == "prev") {
+            pushPos--;
+            btnBlock.childNodes[pushPos+1].style.color = "darkgray";
+        }
+        
+        currentStep = (pushPos-1) + " * (-1) * " + slideStep;
+
+        if (pushPos > pushCount) {pushPos = 1; currentStep = "0px";}
+        if (pushPos < 1) {pushPos = pushCount; currentStep = "-1 * (" + slideStep + ") * " + (countItems-3)}
+    
+    //style
+    btnBlock.childNodes[pushPos].style.color = "gray";
+    step = 'translateX(calc(' + currentStep + '))';
+    item.style.transform = step;
+}    
+}
+
+//Scale img from thumbnails and set to center ==================================================================
 function imageViewer(id) {
     //close old imgView
     closeView();
 
     //get URL
     element = document.querySelector("#" + id);
-    background = window.getComputedStyle(element).background;
+    background = window.getComputedStyle(element).background || window.getComputedStyle(element, null).getPropertyValue("background-image");
     imgUrl = background.split('"')[1];
    
     //get element position
@@ -91,60 +254,3 @@ window.onkeydown = function( event ) {
     if ( event.keyCode == 27 ) {
     }
 };
-
-function blogSlider() {
-
-    let item = document.querySelector('.blogSlider__wrap');
-    let nextBtn = document.querySelector('.next');
-    let prevBtn = document.querySelector('.prev');
-    let pushPos = 1;
-    let btnBlock = document.querySelector(".blog-button");
-    //count items
-    let countItems = document.querySelectorAll('.blogSlider__item').length;
-    
-    //make the pushPosDots
-    for (let i=0; i < countItems-2; i++) {
-        let btnSpan = document.createElement('span');
-        btnSpan.classList.add("pushDots")
-        btnSpan.innerHTML = "&bull;";
-        btnBlock.appendChild(btnSpan);   
-    }
-
-    //get length of step
-    let slideStep = "(100vw/3 - 1vw + 2px)";
-    let currentStep = "0px";
-
-    //listener
-    nextBtn.addEventListener("click", () => changeSlide('next'), false);
-    prevBtn.addEventListener("click", () => changeSlide('prev'), false);
-    item.addEventListener("mouseout", () => timerStart(), false);
-    item.addEventListener("mouseover", function() {clearInterval(intervalID);}, false);
-
-    //timer
-    let intervalID;
-    function timerStart() {
-    intervalID = setInterval(changeSlide, 3000, 'next');
-}
-
-    timerStart()
-
-    //change Slide `
-    function changeSlide(val) {
-        if (val == "next") {
-            pushPos++;
-            btnBlock.childNodes[pushPos-1].style.color = "darkgray";
-        } 
-        if (val == "prev") {
-            pushPos--;
-            btnBlock.childNodes[pushPos+1].style.color = "darkgray";
-        }
-        currentStep = (pushPos-1) + " * (-1) * " + slideStep;
-        if (pushPos > countItems-2) {pushPos = 1; currentStep = "0px";}
-        if (pushPos < 1) {pushPos = countItems-2; currentStep = "-1 * " + slideStep + " * " + (countItems-3)}
-    
-    //style
-    btnBlock.childNodes[pushPos].style.color = "gray";
-    let wtf = 'translateX(calc(' + currentStep + '))';
-    item.style.transform = wtf;
-}    
-}
