@@ -63,12 +63,12 @@
         </div>
         <div class="filter">
             <ul> 
-            <li><span onclick='hide("0")'>all</span></li>
-            <li><span onclick='hide("1")'>web design</span></li>
-            <li><span onclick='hide("2")'>graphics</span></li>
-            <li><span onclick='hide("3")'>video</span></li>
-            <li><span onclick='hide("4")'>illustration</span></li>
-            <li><span onclick='hide("5")'>audio</span></li>
+            <li><span data-class='all'>all</span></li>
+            <li><span data-class='web'>web design</span></li>
+            <li><span data-class='graphics'>graphics</span></li>
+            <li><span data-class='video'>video</span></li>
+            <li><span data-class='illustration'>illustration</span></li>
+            <li><span data-class='audio'>audio</span></li>
             </ul>
         </div>
         <div class="thumbnails grid">
@@ -149,7 +149,7 @@
             &copy; 2020 Moose. All rights reserved. Theme by Ya.
         </div>
     </div>
-    <script>hide("0");</script>
+    <script>filter();</script>
     <script>blogSlider();</script>
 </body>
 </html>

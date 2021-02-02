@@ -15,113 +15,149 @@ function widthScreen() {
 
 //FOR thumbnail filter
 
-function hide(push) {
-    //close old imgViews if need
+function filter() {
+    // close old imgViews if need
     closeView();
-    //CONDITIONS
 
-    let CONDITIONS = ["0", ".empty", ".web, .graphics, .illustration, .audio, .video",
-                  "1", ".graphics, .illustration, .audio, .video", ".web",
-                  "2", ".web, .illustration, .audio, .video", ".graphics",
-                  "3", ".graphics, .web, .illustration, .audio", ".video",
-                  "4", ".graphics, .web, .audio, .video", ".illustration",
-                  "5", ".graphics, .web, .illustration, .video", ".audio"];
-    let hid, shw, lnk;
-    for( let i = 0, x = 0; i < CONDITIONS.length/3; i++){ 
-        if (push == CONDITIONS[x]) {
-            lnk = CONDITIONS[x];
-            hid = CONDITIONS[x+1];
-            shw = CONDITIONS[x+2];
-        }
-        x = x + 3;
-    }
-    //find all what need to hide
-    let toHide = document.querySelectorAll(hid);
-    for( let i = 0; i < toHide.length; i++){ 
-      toHide[i].style.display = "none";
-    }
+    // start
+    const CONDITIONS = ["web", "graphics", "video", "illustration", "audio"],
+          thmbBtns = document.querySelectorAll(".filter ul li span"); 
+    
+    thmbBtns.forEach( (item) => {
 
-    //find all what need to show
-    let toShow = document.querySelectorAll(shw);
-    for( let i = 0; i < toShow.length; i++){ 
-      toShow[i].style.display = "block"; 
-    }
+    // colorize filter links
+        item.addEventListener('click', (event) => {
+            thmbBtns.forEach( (el) => {
+                el.style.color = ""; // reset Link colors
+            });
+            event.target.style.color = "#fa6c65"; // colorize Link in red
 
-    //for drop red color from prevue link 
-    let clear = document.querySelectorAll('.filter ul li');
-    for( let z = 0; z < clear.length; z++){
-        clear[z].style.color = "";
-    }
+    // logic
+            const classForFilter = event.target.getAttribute('data-class'); // what we need to filter?
 
-    //painting the current link in red
-    let selector = 1 + parseInt(lnk);
-    let link = document.querySelector('.filter ul li:nth-child(' + selector +')');
-    link.style.color = "#fa6c65";
+            if (classForFilter == 'all') {
+                CONDITIONS.forEach( (elem) => { // take classnames from CONDITIONS step by step
+                    const i = document.querySelectorAll('.' + elem); // get object with div-elements
+                    i.forEach( (x) => {
+                        x.style.display = "block";
+                    });                   
+                });
+                    
+            } else {
+                CONDITIONS.forEach( (elem) => {
+                    const elemsForFilter = document.querySelectorAll("." + elem);
+                    if (elem !== classForFilter) {
+                        elemsForFilter.forEach( (y) => {
+                            y.style.display = "none";
+                        });
+                    } else {
+                        elemsForFilter.forEach( (y) => {
+                            y.style.display = "";
+                        });
+                    }
+                    
+                });
+            }
+        });
+    });
+
+
+    // let hid, shw, lnk;
+    // for( let i = 0, x = 0; i < CONDITIONS.length/3; i++){ 
+    //     if (push == CONDITIONS[x]) {
+    //         lnk = CONDITIONS[x];
+    //         hid = CONDITIONS[x+1];
+    //         shw = CONDITIONS[x+2];
+    //     }
+    //     x = x + 3;
+    // }
+    // //find all what need to hide
+    // let toHide = document.querySelectorAll(hid);
+    // for( let i = 0; i < toHide.length; i++){ 
+    //   toHide[i].style.display = "none";
+    // }
+
+    // //find all what need to show
+    // let toShow = document.querySelectorAll(shw);
+    // for( let i = 0; i < toShow.length; i++){ 
+    //   toShow[i].style.display = "block"; 
+    // }
+
+    // //for drop red color from prevue link 
+    // let clear = document.querySelectorAll('.filter ul li');
+    // for( let z = 0; z < clear.length; z++){
+    //     clear[z].style.color = "";
+    // }
+
+    // //painting the current link in red
+    // let selector = 1 + parseInt(lnk);
+    // let link = document.querySelector('.filter ul li:nth-child(' + selector +')');
+    // link.style.color = "#fa6c65";
 
     //call func for hide part of thumbnails
-    countThumb('hide', '1');
+    // countThumb('hide', '1');
 }
 
 //Adaptation thumbnails for small screen(hide half elements) ===================================================
 
 // GLOBAL
-    let shwdElems = []; //elems display:block now
-    let counter = 0; //num of shwdElems
+    // let shwdElems = []; //elems display:block now
+    // let counter = 0; //num of shwdElems
 
 // END GLOBAL
 
-function countThumb(status, tab) { // PLEASE rename func!!!
+// function countThumb(status, tab) { // PLEASE rename func!!!
 
-    let elem = document.querySelector('.thumbnails');
-    let btn = document.getElementById('showHide');
-    let screenMode = widthScreen();
+//     let elem = document.querySelector('.thumbnails');
+//     let btn = document.getElementById('showHide');
+//     let screenMode = widthScreen();
 
-   if (tab == 1) {test2hide();} //if page reload or changed filter
+//    if (tab == 1) {test2hide();} //if page reload or changed filter
     
-    function test2hide() { //seek not hidden elems
-        shwdElems = [];
-        counter = 0;
+//     function test2hide() { //seek not hidden elems
+//         shwdElems = [];
+//         counter = 0;
 
-        for (let i=0; i<elem.childNodes.length; i++) {
-            try {
-                let display = elem.childNodes[i].style.display;
-                if (display == 'block') {
-                    shwdElems.push(i);
-                }
-            } catch {}
-        }
-        window.shwdElems = shwdElems;
-        counter = shwdElems.length;
-        window.counter = counter;
-        return counter, shwdElems;
-    }
+//         for (let i=0; i<elem.childNodes.length; i++) {
+//             try {
+//                 let display = elem.childNodes[i].style.display;
+//                 if (display == 'block') {
+//                     shwdElems.push(i);
+//                 }
+//             } catch {}
+//         }
+//         window.shwdElems = shwdElems;
+//         counter = shwdElems.length;
+//         window.counter = counter;
+//         return counter, shwdElems;
+//     }
 
-    if (screenMode == "M") { //smaller than 820 (3 colums)
-        if (status == 'hide') {statusHide();} else if (status == 'show') {statusShow();} else {console.log('ERROR');}
+//     if (screenMode == "M") { //smaller than 820 (3 colums)
+//         if (status == 'hide') {statusHide();} else if (status == 'show') {statusShow();} else {console.log('ERROR');}
 
-        function statusHide() {
-            if (counter > 6) {
-                for (let i = counter - 1; i>=6; i--) {
-                    elem.childNodes[shwdElems[i]].style.display = "none";
-                }
-                btn.style.display = "block";
-                btn.value = "Показать еще";
-                btn.setAttribute('onclick','countThumb("show", "0")');
-            } else {
-                btn.style.display = "none";
-            }
-        }
+//         function statusHide() {
+//             if (counter > 6) {
+//                 for (let i = counter - 1; i>=6; i--) {
+//                     elem.childNodes[shwdElems[i]].style.display = "none";
+//                 }
+//                 btn.style.display = "block";
+//                 btn.value = "Показать еще";
+//                 btn.setAttribute('onclick','countThumb("show", "0")');
+//             } else {
+//                 btn.style.display = "none";
+//             }
+//         }
 
-        function statusShow() {
-            for (let i = window.counter - 1; i>=6; i--) {
-                elem.childNodes[window.shwdElems[i]].style.display = "block";
-            }   
-            btn.style.display = "block";
-            btn.value = "Скрыть";
-            btn.setAttribute('onclick','countThumb("hide", "0")');
-        }
-    }
-}
+//         function statusShow() {
+//             for (let i = window.counter - 1; i>=6; i--) {
+//                 elem.childNodes[window.shwdElems[i]].style.display = "block";
+//             }   
+//             btn.style.display = "block";
+//             btn.value = "Скрыть";
+//             btn.setAttribute('onclick','countThumb("hide", "0")');
+//         }
+//     }
+// }
 
 // blogslider ===================================================================================================
 
@@ -211,46 +247,51 @@ function imageViewer(id) {
     closeView();
 
     //get URL
-    element = document.querySelector("#" + id);
-    background = window.getComputedStyle(element).background || window.getComputedStyle(element, null).getPropertyValue("background-image");
-    imgUrl = background.split('"')[1];
+ const element = document.querySelector("#" + id),
+       background = window.getComputedStyle(element).background || 
+           window.getComputedStyle(element, null).getPropertyValue("background-image"),
+       imgUrl = background.split('"')[1];
    
-    //get element position
-    let coords = element.getBoundingClientRect();
-
-    //get current scroll
-    let scroll = window.pageYOffset;
-
-    //get window size and calc image-sizing and proportion
-    let imageProportion =  window.innerWidth / coords.width * 0.5;
-    let imgWidth = coords.width*imageProportion;
-    let imgHeight = coords.height*imageProportion;
-    let topPadding = (window.innerHeight - coords.height*imageProportion) / 2;
-    let topPosition = scroll + topPadding;
-    let leftPosition = (window.innerWidth - imgWidth) / 2;
+    // //get element position
+    const coords = element.getBoundingClientRect(),
+          scroll = window.pageYOffset,
+          imageProportion =  window.innerWidth / coords.width * 0.5,
+          imgWidth = coords.width*imageProportion,
+          imgHeight = coords.height*imageProportion;
 
     //create imgView
-    let view = document.createElement('div');
-    view.classList.add("imgView")
+    let overlay = document.createElement('div'),
+        view = document.createElement('div');
+    view.classList.add("imgView");
+    overlay.classList.add("imgOverlay");
     view.innerHTML = "<input type='button' alt='='Закрыть'' title='Закрыть' value='X' onclick='closeView()'>";
-    view.style.cssText = "top:" + topPosition + "px; left:" + leftPosition + "px; width:" + 
-            imgWidth + "px; height:" + imgHeight + "px; background: url(" + imgUrl + "); background-size: cover;";
+    // view.style.cssText = "top:" + topPosition + "px; left:" + leftPosition + "px; width:" + 
+    //         imgWidth + "px; height:" + imgHeight + "px; background: url(" + imgUrl + "); background-size: cover;";
+    view.style.cssText = `background: url("${imgUrl}"); background-size: cover; top: calc(${scroll}px + 25%);
+         width: ${imgWidth}px; height: ${imgHeight}px`;
+  
+    document.body.append(overlay);
     document.body.append(view);
+    overlay.addEventListener("click", closeView);  
 
 }
 
 //turn off the imgView
 function closeView() {
+
     //close old window if need
-       if (document.querySelector(".imgView") != null) {
-        let toRm = document.querySelector(".imgView");
-        toRm.remove();
+       if (document.querySelector(".imgView")) {
+        const toRm1 = document.querySelector(".imgView"),
+              toRm2 = document.querySelector(".imgOverlay");
+        toRm1.remove();
+        toRm2.remove();
     }
 }
 
 //turn off the imgView by the press ESC
 window.onkeydown = function( event ) {
-    closeView();
+  
     if ( event.keyCode == 27 ) {
+        closeView();
     }
 };
