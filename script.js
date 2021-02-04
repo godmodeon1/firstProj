@@ -60,7 +60,7 @@ function filter() {
             }
         });
     });
-
+}
 
     // let hid, shw, lnk;
     // for( let i = 0, x = 0; i < CONDITIONS.length/3; i++){ 
@@ -96,7 +96,7 @@ function filter() {
 
     //call func for hide part of thumbnails
     // countThumb('hide', '1');
-}
+
 
 //Adaptation thumbnails for small screen(hide half elements) ===================================================
 
@@ -162,83 +162,138 @@ function filter() {
 // blogslider ===================================================================================================
 
 
+
 function blogSlider() {
+    
+    const blogSliderWrap = document.querySelector('.blogSlider__wrap'),
+          nextBtn = document.querySelector('.next'),
+          prevBtn = document.querySelector('.prev'),
+          btnBlock = document.querySelector(".blog-button");
 
-    let item = document.querySelector('.blogSlider__wrap');
-    let nextBtn = document.querySelector('.next');
-    let prevBtn = document.querySelector('.prev');
-    let pushPos = 1;
-    let pushCount = 0;
-    let step, slideStep, currentStep, toRm, screenMode, countItems;
-    let btnBlock = document.querySelector(".blog-button");
-
+    let step = 0, 
+        slideStep = 0, 
+        currentStep = "0px", 
+        toRm = 0, 
+        screenMode = 0, 
+        pushPos = 1, 
+        pushCount = 0,
+        intervalID = 0;
+ 
     //count div items in BlogSlider
-    countItems = document.querySelectorAll('.blogSlider__item').length;
-
-    //pushPosDots
-        //close OLD dots if need
-    if (document.querySelector(".pushDots") != null) {
-        toRm = document.querySelector(".pushDots");
-        toRm.remove();
-    }
-
-    //get screenMode from fucnc
-    screenMode = widthScreen();
-    console.log("screenMode: " + screenMode);
-    //get length of step
-    if (screenMode == "S") {
-        pushCount = countItems;
-        slideStep = document.documentElement.clientWidth + "px";
-    } else {
-        pushCount = countItems-2;
-        slideStep = document.documentElement.clientWidth / 3 + "px";
-    }
-
-    currentStep = "0px";
-
-    //make NEW dots
-    for (let i=0; i < pushCount; i++) {
-        let btnSpan = document.createElement('span');
-        btnSpan.classList.add("pushDots");
-        btnSpan.innerHTML = "&bull;";
-        btnBlock.appendChild(btnSpan);   
-    }    
+    const countItems = document.querySelectorAll('.blogSlider__item').length;
 
     //listener
     nextBtn.addEventListener("click", () => changeSlide('next'), false);
     prevBtn.addEventListener("click", () => changeSlide('prev'), false);
-    item.addEventListener("mouseout", () => timerStart(), false);
-    item.addEventListener("mouseover", function() {clearInterval(intervalID);}, false);
+    blogSliderWrap.addEventListener("mouseout", () => timerStart(), false);
+    blogSliderWrap.addEventListener("mouseover", function() {clearInterval(intervalID);}, false);
 
-    //timer
-    let intervalID;
+
+
+    function changeScreenMode() {
+        screenMode = widthScreen();    //get screenMode from fucnc
+    }
+    changeScreenMode();
+
+    // function rmDots() {  // close OLD dots if need
+    
+    //     if (document.querySelector(".pushDots")) {
+    //         toRm = document.querySelector(".pushDots");
+    //         toRm.remove();
+    //     }
+
+    // }
+    // rmDots();
+
+    function getStep() {
+        //get length of step
+        if (screenMode == "S") {
+            pushCount = countItems;
+            slideStep = document.documentElement.offsetWidth + "px";
+        } else {
+            pushCount = countItems-2;
+            slideStep = document.documentElement.offsetWidth / 3 + "px";
+        }
+        return pushCount, slideStep;
+    }
+    getStep();
+
+    // function getStep() {
+    //     //get length of step
+    //     if (screenMode == "S") {
+    //         pushCount = countItems;
+    //         slideStep = document.documentElement.clientWidth + "px";
+    //     } else {
+    //         pushCount = countItems-2;
+    //         slideStep = document.documentElement.clientWidth / 3 + "px";
+    //     }
+    //     return pushCount, slideStep;
+    // }
+    // getStep();
+
+
+    function makeDots() {
+        const oldDots = document.querySelectorAll(".pushDots");
+        
+        if (oldDots.length > 0) {
+            oldDots.forEach((i) => {
+                console.log(i);
+                i.remove();                
+            });
+    
+        }
+        // make NEW dots
+        if (!document.querySelector(".pushDots")) {
+            for (let i=0; i < pushCount; i++) {
+                const btnSpan = document.createElement('span');
+                btnSpan.classList.add("pushDots");
+                btnSpan.innerHTML = "&bull;";
+                btnBlock.appendChild(btnSpan);   
+            }
+        }    
+    }
+    makeDots();
+
     function timerStart() {
-    intervalID = setInterval(changeSlide, 3000, 'next');
+        if (intervalID) {clearInterval(intervalID);}
+        intervalID = setInterval(changeSlide, 3000, 'next');
     }
 
     timerStart();
 
     //change Slide
     function changeSlide(val) {
+ 
+    function testForExistDots() {
+        if (pushPos > pushCount) {pushPos = 1; currentStep = "0px";}
+        if (pushPos < 1) {pushPos = pushCount; currentStep = "-1 * (" + slideStep + ") * " + (countItems-3);}
+    }
+        
+        changeScreenMode();
+        getStep();
+        makeDots(); 
+        testForExistDots();
+
         if (val == "next") {
             pushPos++;
             btnBlock.childNodes[pushPos-1].style.color = "darkgray";
         } 
+
         if (val == "prev") {
             pushPos--;
             btnBlock.childNodes[pushPos+1].style.color = "darkgray";
         }
         
-        currentStep = (pushPos-1) + " * (-1) * " + slideStep;
-
-        if (pushPos > pushCount) {pushPos = 1; currentStep = "0px";}
-        if (pushPos < 1) {pushPos = pushCount; currentStep = "-1 * (" + slideStep + ") * " + (countItems-3)}
-    
+        currentStep = `(${pushPos} - 1) * (-1) * ${slideStep}`;
+        console.log(currentStep);
+ 
+    testForExistDots();
+ 
     //style
     btnBlock.childNodes[pushPos].style.color = "gray";
     step = 'translateX(calc(' + currentStep + '))';
-    item.style.transform = step;
-}    
+    blogSliderWrap.style.transform = step;
+    }    
 }
 
 //Scale img from thumbnails and set to center ==================================================================
@@ -276,10 +331,10 @@ function imageViewer(id) {
 
 }
 
-//turn off the imgView
+//turn off the imgView - close old window if need
+
 function closeView() {
 
-    //close old window if need
        if (document.querySelector(".imgView")) {
         const toRm1 = document.querySelector(".imgView"),
               toRm2 = document.querySelector(".imgOverlay");
