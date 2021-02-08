@@ -13,7 +13,7 @@ function changeScreenMode() {
     return screenMode;   
 }
 
-//FOR thumbnail filter
+// F I L T E R - FOR thumbnail filter
 
 function filter() {
     // close old imgViews if need
@@ -62,16 +62,16 @@ function filter() {
     });
 }
 
-// blogslider ===================================================================================================
+// B L O G  S L I D E R ========================================================
 
 function blogSlider() {
     
     const blogSliderWrap = document.querySelector('.blogSlider__wrap'),
         nextBtn = document.querySelector('.next'),
         prevBtn = document.querySelector('.prev'),
-        btnBlock = document.querySelector(".blog-button"),
-        scrl = document.documentElement.offsetWidth - document.documentElement.clientWidth,
-        wrap = document.querySelectorAll(".blogSlider__item");
+        btnBlock = document.querySelector(".blog-button");
+        // scrl = document.documentElement.offsetWidth - document.documentElement.clientWidth,
+        // wrap = document.querySelectorAll(".blogSlider__item");
 
     let slideStep = 0, 
         currentStep = "0px", 
@@ -79,10 +79,7 @@ function blogSlider() {
         pushCount = 0,
         intervalID = 0;
     
-        wrap.forEach((i) => {
-            console.log(i);
-            i.style.flex = `0 0 calc(100vw - ${scrl} /3)`;
-        });
+
     //count div items in BlogSlider
     const countItems = document.querySelectorAll('.blogSlider__item').length;
 
@@ -96,13 +93,12 @@ function blogSlider() {
         //get length of step
         if (changeScreenMode() == "S") {
             pushCount = countItems;
-//            slideStep = document.documentElement.offsetWidth + "px";
-            slideStep = document.querySelector(".blogSlider__wrap").offsetWidth + "px";
+            slideStep = "100%";
+            // slideStep = document.querySelector(".blogSlider__wrap").offsetWidth + "px";
             console.log(slideStep);
         } else {
             pushCount = countItems-2;
-//            slideStep = document.documentElement.offsetWidth / 3 + "px";
-            slideStep = (document.querySelector(".blogSlider__wrap").offsetWidth - scrl) / 3 + "px";
+            slideStep = "33%";
             console.log(slideStep);
         }
         return pushCount, slideStep;
@@ -170,7 +166,8 @@ function blogSlider() {
     }    
 }
 
-//Scale img from thumbnails and set to center ==================================================================
+// I M A G E  V I E W E R - Scale img from thumbnails and set to center ==============================
+
 function imageViewer(id) {
     //close old imgView
     closeView();
@@ -185,7 +182,7 @@ function imageViewer(id) {
     let sizeCoof, margLeft;
     if (changeScreenMode() == "S") {
         sizeCoof = 0.9;
-        margLeft = `calc((5% - ${scrollXWidth}px))`;
+        margLeft = `calc((10% - ${scrollXWidth}px)*0.5)`;
         console.log(margLeft);
     } else {
         sizeCoof = 0.5;
@@ -208,7 +205,7 @@ function imageViewer(id) {
     //         imgWidth + "px; height:" + imgHeight + "px; background: url(" + imgUrl + "); background-size: cover;";
     view.style.cssText = `background: url("${imgUrl}"); 
                           background-size: cover; 
-                          left: ${margLeft};  
+                          left: ${margLeft}; 
                           top: calc(${scrollY}px + 25%);
                           width: ${imgWidth}px; 
                           height: ${imgHeight}px`;
