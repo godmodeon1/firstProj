@@ -463,14 +463,13 @@ li {
   .imgView {
     width: 50%;
     height: 50%;
-    left: 25%;
     position:absolute;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: right;
     padding: 7px 7px;
     border: 1px solid black;
     animation: imgViewOpacity 0.5s ease forwards;
-    box-shadow: 0 0 3vw #fff;
+    box-shadow: 0 0 0.5vw #000;
   } 
   .imgView input {
     font-size: 1em;
@@ -832,13 +831,13 @@ li {
       'contacts contacts contacts contacts'
       'header header header header'; /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
     align-items: center;
-    background-color: #C7D0D9;
+ 
   }
   .slider {display:none;}
   .nav {display: none;}
 
   .header {
-    background-color: #C7D0D9;
+    background-color: #fff;
     padding: 5px 0;
     justify-self: center;
     text-shadow: 0 2px 8px #fff;
