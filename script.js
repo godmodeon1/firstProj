@@ -200,7 +200,7 @@ function imageViewer(id) {
 
     view.classList.add("imgView");
     overlay.classList.add("imgOverlay");
-    view.innerHTML = "<input type='button' alt='='Закрыть'' title='Закрыть' value='X' onclick='closeView()'>";
+    view.innerHTML = "<input type='button' alt='='Закрыть'' title='Закрыть' value='&#10006;' onclick='closeView()'>";
     // view.style.cssText = "top:" + topPosition + "px; left:" + leftPosition + "px; width:" + 
     //         imgWidth + "px; height:" + imgHeight + "px; background: url(" + imgUrl + "); background-size: cover;";
     view.style.cssText = `background: url("${imgUrl}"); 

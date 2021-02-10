@@ -478,6 +478,7 @@ li {
     background-color: #fff;
     opacity: 0.5;
     text-transform: lowercase;
+    margin: 4px;
   }
   .imgOverlay {
     position: fixed;
