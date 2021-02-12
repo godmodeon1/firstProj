@@ -138,6 +138,61 @@ li {
   .grid-container > div {
     text-align: center; /* горизонтальное выравнивание текста */
   }
+  .mmenu {
+    display: none;
+    grid-area: mmenu; /* задаем имя элемента */
+    align-self: center;
+    justify-self: left;
+    padding-left: 20px;
+  }
+  .mmenu:hover #menubtn {
+    transform: rotate(-90deg);
+
+  }
+  [id='nav-toggle']:checked ~ .sidemenu {
+    left: 0;
+  }
+
+  .nav-toggle {
+    border-radius: 20%;
+    padding: 0.5em;
+    border: 1px solid lightgray;
+    color: #555;
+    background: linear-gradient(45deg, #fff, gray);
+    opacity: 0.5;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+  }
+  .nav-toggle:hover {
+    background: linear-gradient(45deg, #fff, darkgray);
+  }
+
+  .sidemenu {
+    box-sizing: border-box;
+    left: -100%;
+    width: 90%;
+    background-color: lightgray;
+    height: 85%;
+    border: 1px solid rgb(32, 43, 50);
+    opacity: 0.97;
+    position: fixed;
+    z-index: 111;
+    padding: 20px;
+    padding-left: 10%;
+    font-size: 200%;
+    line-height: 2em;
+    transition: all 0.3s ease;
+  }
+  .sidemenu ul li{
+     float: none;
+  }
+
+  .sidemenu ul li a {
+    color:rgb(32, 43, 50);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+  }
+
   .header {
     grid-area: header; /* задаем имя элемента */
     align-self: center;
@@ -269,6 +324,8 @@ li {
     color: #5c5c5c;
     font-family: 'Roboto Slab', serif;
   }
+
+
   .second-container {
     display: grid; /* элемент отображается как блочный   grid-контейнер */
     grid-template-rows: auto 200px; /* определяем количество и ширину строк в макете сетки */
@@ -831,9 +888,11 @@ li {
     grid-template-columns: repeat(4, 1fr); /* определяем количество и ширину столбцов в макете сетки */
     grid-template-areas:
       'contacts contacts contacts contacts'
-      'header header header header'; /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
+      'mmenu header header .'; /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
     align-items: center;
- 
+  }
+  .mmenu {
+    display: block;
   }
   .slider {display:none;}
   .nav {display: none;}
