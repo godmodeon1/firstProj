@@ -99,7 +99,6 @@ function blogSlider() {
         } else {
             pushCount = countItems-2;
             slideStep = "33%";
-            console.log(slideStep);
         }
         return pushCount, slideStep;
     }
@@ -192,7 +191,8 @@ function imageViewer(id) {
           scrollY = window.pageYOffset,   
           imageProportion =  window.innerWidth / coords.width * sizeCoof,
           imgWidth = coords.width*imageProportion,
-          imgHeight = coords.height*imageProportion;      
+          imgHeight = coords.height*imageProportion,
+          margTop = (window.innerHeight - imgHeight) / 2;
 
     //create imgView
     let overlay = document.createElement('div'),
@@ -206,7 +206,7 @@ function imageViewer(id) {
     view.style.cssText = `background: url("${imgUrl}"); 
                           background-size: cover; 
                           left: ${margLeft}; 
-                          top: calc(${scrollY}px + 25%);
+                          top: calc(${scrollY}px + ${margTop}px);
                           width: ${imgWidth}px; 
                           height: ${imgHeight}px`;
   

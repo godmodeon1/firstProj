@@ -159,7 +159,7 @@ li {
     border: 1px solid lightgray;
     color: #555;
     background: linear-gradient(45deg, #fff, gray);
-    opacity: 0.5;
+    opacity: 0.3;
     transition: 0.5s ease-in-out;
     cursor: pointer;
   }
@@ -170,10 +170,10 @@ li {
   .sidemenu {
     box-sizing: border-box;
     left: -100%;
-    width: 90%;
+    top: 89px;
+    width: 100%;
     background-color: lightgray;
-    height: 85%;
-    border: 1px solid rgb(32, 43, 50);
+    height: 88%;
     opacity: 0.97;
     position: fixed;
     z-index: 111;
@@ -182,6 +182,7 @@ li {
     font-size: 200%;
     line-height: 2em;
     transition: all 0.3s ease;
+    border: 1px solid #5c5c5c;
   }
   .sidemenu ul li{
      float: none;
@@ -890,6 +891,11 @@ li {
       'contacts contacts contacts contacts'
       'mmenu header header .'; /* определяем шаблон макета сетки, ссылаясь при этом на имена областей элементов */
     align-items: center;
+    position: fixed;
+    width: 100%;
+    background-color: #fff;
+    z-index: 20;
+    box-shadow: 0 0 10px 20px #fff;
   }
   .mmenu {
     display: block;
@@ -927,6 +933,7 @@ li {
     padding: 0 20px;
   }
   .slogan {
+    margin-top: 88px;
     padding-bottom: 30px;
   }
   .slogan h2 {
